@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booksaw.co</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Rubik:wght@500&&family=Water+Brush&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="/js/new_book.js"></script>
+
+    <link rel="stylesheet" href="/css/cate.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <link rel="stylesheet" href="/css/cart.css" />
+  </head>
+  <body>
+    <header>
+      <div class="nav_section">
+        <a href="#">
+          <img class="logo" src="/images/main-logo.png" alt="logo" />
+        </a>
+        <nav class="nav">
+          <ul class="nav_list">
+            <li class="nav_item">
+              <a href="back_home" class="nav_link">
+                <div class="flex_box">
+                  <!-- <ion-icon style="font-size: 2.5rem;" name="home-outline"></ion-icon> -->
+                  <span>Home</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav_item">
+              <a href="books_user" class="nav_link">
+                <div class="flex_box">
+                  <!-- <ion-icon style="font-size: 2.5rem;" name="home-outline"></ion-icon> -->
+                  <span>Books</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav_item">
+              <a href="Show_cate" class="nav_link">
+                <div class="flex_box">
+                  <!-- <ion-icon style="font-size: 2.5rem;" name="people-outline"></ion-icon> -->
+                  <span>Category</span>
+                </div>
+              </a>
+            </li>
+
+            <li class="nav_item">
+              <a href="#" class="nav_link">
+                <div class="flex_box">
+                  <!-- <ion-icon style="font-size: 2.5rem;" name="book-outline"></ion-icon> -->
+                  <span>Blog</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav_item">
+              <a href="#" class="nav_link">
+                <div class="flex_box">
+                  <!-- <ion-icon style="font-size: 2.5rem;" name="book-outline"></ion-icon> -->
+                  <span>About us</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="flex_box">
+          <input type="hidden" name="search" placeholder="Search book" id="" />
+          <ion-icon class="icon_search" name="search-outline"></ion-icon>
+
+          <a
+            style="text-decoration: none; color: inherit"
+            href="wishlist"
+            class="sign"
+            ><ion-icon style="font-size: 2.5rem" name="heart-outline"></ion-icon
+          ></a>
+          <a style="text-decoration: none; color: inherit" href="show_cart">
+            <ion-icon class="icon_cart" name="bag-outline"></ion-icon
+          ></a>
+          <!-- <ion-icon
+            style="font-size: 3rem; text-align: center"
+            name="person-circle-outline"
+          ></ion-icon> -->
+          <a href="#" class="profile"
+            ><span style="text-transform: capitalize">Hi,</span> <%=user%>
+          </a>
+          <div id="pro_box" class="profile_box hidden">
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+                border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+              "
+            >
+              <div class="icon_profile">
+                <!-- <ion-icon name="person-outline"></ion-icon> -->
+                <img class="profile" src="/images/profile.jpg" alt="" />
+              </div>
+              <h2 class="pName"><%=user%></h2>
+              <h2 class="pEmail" style="margin-bottom: 3rem"><%=uEmail%></h2>
+            </div>
+            <a class="logout" href="logout" rel="noopener noreferrer">Logout</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section_cate">
+      <!-- <h2 class="primary_heading">Genre</h2> -->
+      <div class="logos">
+        <div class="logos-slide">
+          <a class="box_link" href="personal">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/Ikigai.jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Personal Development</span>
+            </div>
+          </a>
+          <a class="box_link" href="Spirit">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/KARMA.jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Spirituality</span>
+            </div>
+          </a>
+          <a class="box_link" href="Fantasy">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/Fantastic Beasts and Where to Find Them.jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Fantasy novel</span>
+            </div>
+          </a>
+          <a class="box_link" href="Bus&Eco">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/The Psychology of Money.jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Business & Economics</span>
+            </div>
+          </a>
+          <a class="box_link" href="Biography">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/Into the Wild.jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Biography</span>
+            </div>
+          </a>
+          <a class="box_link" href="Philosophy">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/The Alchemist.jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Philosophy</span>
+            </div>
+          </a>
+          <a class="box_link" href="SciFi">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/The Martian (Weir novel).jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">SciFi</span>
+            </div>
+          </a>
+          <a class="box_link" href="History">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/Sapiens.jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">History</span>
+            </div>
+          </a>
+          <a class="box_link" href="Autography">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/apj.jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Autography</span>
+            </div>
+          </a>
+          <a class="box_link" href="Act&dAd">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/Dune.jpeg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Action and Adventure</span>
+            </div>
+          </a>
+          <a class="box_link" href="Det&My">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/Murder on the Orient Express.jpg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Detective and Mystery</span>
+            </div>
+          </a>
+          <a class="box_link" href="Novel">
+            <div class="box">
+              <img
+                class="cate_img"
+                src="/images/book_img/One Hundred Years of Solitude.jpeg"
+                alt="book_img"
+              />
+              <span class="cate_txt">Novel</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script>
+    const profile = document.querySelector(".profile");
+    const box = document.getElementById("pro_box");
+
+    profile.addEventListener("click", (el) => {
+      box.classList.toggle("hidden");
+      console.log("hello");
+    });
+  </script>
+</html>

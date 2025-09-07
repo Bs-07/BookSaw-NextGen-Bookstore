@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booksaw.co</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Rubik:wght@500&&family=Water+Brush&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+
+    <script defer src="/js/cate_popup.js"></script>
+    <script defer src="/js/add_to_cart.js"></script>
+    <script defer src="/js/copy.js"></script>
+
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/show_order.css" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <%- include('partials/header') %>
+
+    <section class="Show-orders_section">
+      <div class="Show-orders_container">
+        <h1>Order History</h1>
+
+        <% if (orders && orders.length > 0) { %> <% orders.forEach(order => { %>
+        <div class="order-group">
+          <div class="rp_flex_box">
+            <div class="order_date">
+              <% const dateObj = new Date(order.order_date); const dateString =
+              dateObj.toLocaleString("en-IN", { day: "numeric", month: "long",
+              year: "numeric", hour: "numeric", minute: "2-digit", timeZone:
+              "Asia/Kolkata" }); %>
+              <p class="date"><%= dateString %></p>
+              <p class="total_amt">
+                Order Total:
+                <strong>₹<%= Number(order.total_amount).toFixed(2) %></strong>
+              </p>
+            </div>
+            <!-- receipt button -->
+            <ion-icon
+              class="icon_receipt receipt_icon"
+              name="receipt-outline"
+              onclick="openReceipt('<%= order.order_id %>')"
+            >
+            </ion-icon>
+          </div>
+
+          <% if (order.items && order.items.length > 0) { %> <%
+          order.items.forEach(item => { %>
+          <div class="item_con">
+            <div class="cart_item--box">
+              <div class="img_box">
+                <img
+                  class="img"
+                  src="/images/book_img/<%= item.file_name %>"
+                  alt="<%= item.book_name %>"
+                />
+              </div>
+              <div class="C_box_txt">
+                <h4><%= item.book_name %></h4>
+                <span><%= item.author %></span>
+                <span class="cate"><%= item.cate %></span>
+              </div>
+              <div>
+                <span style="font-size: 1.2rem">x <%= item.quantity %></span>
+              </div>
+              <div>
+                <span class="status <%= item.status %>"
+                  ><%= item.status %></span
+                >
+              </div>
+              <span style="font-size: 1.2rem; font-weight: 600"
+                >Delivered by <%= new Date(order.delivery_date).toDateString()
+                %></span
+              >
+              <div class="tol_price">
+                <span class="price"
+                  >₹ <%= Number(item.price).toFixed(2) %></span
+                >
+              </div>
+              <div class="cancel-order">
+                <a
+                  style="text-decoration: none; color: inherit"
+                  href="/cancel_order?orderItemId=<%= item.id %>"
+                  >Cancel Order</a
+                >
+              </div>
+            </div>
+          </div>
+          <% }) %> <% } else { %>
+          <p>No items found for this order.</p>
+          <% } %>
+        </div>
+
+        <!-- 🔹 Receipt Popup for this order -->
+        <div id="printableArea-<%= order.order_id %>" class="receipt hidden">
+          <div class="rp_flex_box top_box">
+            <h2>Order Receipt</h2>
+            <div style="display: flex; align-items: center; gap: 2rem">
+              <ion-icon
+                class="icon_print print"
+                onclick="printDiv('printableArea-<%= order.order_id %>')"
+                name="print-outline"
+              >
+              </ion-icon>
+              <ion-icon
+                style="font-size: 2.9rem"
+                class="icon_close"
+                name="close-outline"
+                onclick="closeReceipt('<%= order.order_id %>')"
+              >
+              </ion-icon>
+            </div>
+          </div>
+
+          <div class="rp_flex_box">
+            <img class="receipt_logo" src="/images/main-logo.png" alt="logo" />
+            <h1 class="comp">Booksaw.co</h1>
+          </div>
+
+          <!-- delivery & items (your current receipt template) -->
+          <div class="delivery_timing">
+            <div>
+              <% const date_Obj = new Date(order.order_date); const day = ('0' +
+              date_Obj.getDate()).slice(-2); const month = ('0' +
+              (date_Obj.getMonth() + 1)).slice(-2); const year =
+              date_Obj.getFullYear(); let hours = date_Obj.getHours(); const
+              minutes = date_Obj.getMinutes(); const seconds =
+              date_Obj.getSeconds(); const ampm = hours >= 12 ? 'P.M.' : 'A.M.';
+              hours = hours % 12 || 12; const formattedMinutes =
+              minutes.toString().padStart(2, '0'); const formattedSeconds =
+              seconds.toString().padStart(2, '0'); const timeString =
+              `${hours}:${formattedMinutes}:${formattedSeconds} ${ampm}`; %>
+              <p><%= day %>/<%= month %>/<%= year %></p>
+              <p style="font-style: normal" class="main"><%= timeString %></p>
+
+              <!-- delivery address -->
+              <p><%= order.address %></p>
+              <p><%= order.city %></p>
+              <p><%= order.state %> <%= order.pin %></p>
+              <p><%= order.country %></p>
+            </div>
+
+            <div>
+              <% if (order.delivery_date) { const DateObj = new
+              Date(order.delivery_date); const Day = ('0' +
+              DateObj.getDate()).slice(-2); const Month = ('0' +
+              (DateObj.getMonth() + 1)).slice(-2); const Year =
+              DateObj.getFullYear(); %>
+              <p>
+                Delivery Date: <span><%= Day %>.<%= Month %>.<%= Year %></span>
+              </p>
+
+              <% } %>
+
+              <p><%= order.u_name %></p>
+              <p><%= order.user_email %></p>
+              <p>Teles. <%= order.u_mobileNo %></p>
+            </div>
+          </div>
+          <div class="products_detail">
+            <div class="product_list">
+              <span>Product</span>
+              <span>Count</span>
+              <span>Price</span>
+            </div>
+            <% order.items.forEach(item => { %>
+            <div class="product_item">
+              <p><%= item.book_name %></p>
+              <p><%= item.quantity %></p>
+              <p><%= item.price %></p>
+            </div>
+            <% }); %>
+          </div>
+          <div class="total_box">
+            <div>
+              <p>Subtotal</p>
+              <p>Shipping</p>
+            </div>
+            <div>
+              <p><%= order.total_amount %></p>
+              <p>Free</p>
+            </div>
+          </div>
+
+          <div class="total_detail">
+            <div class="flex_div">
+              <p>Total</p>
+              <p><%= order.total_amount %></p>
+            </div>
+          </div>
+          <div
+            style="
+              display: grid;
+              justify-content: center;
+              text-align: center;
+              gap: 1rem;
+              margin-top: 2rem;
+            "
+          >
+            <p style="font-size: 1.5rem">Thank you for Shopping!</p>
+            <p class="barcode">BOOKSAW one booksaw one BOOKSAW</p>
+          </div>
+        </div>
+        <!-- end of receipt -->
+        <% }) %> <% } else { %>
+        <p
+          style="
+            display: flex;
+            place-content: center;
+            justify-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+          "
+        >
+          You haven't placed any orders yet.
+        </p>
+        <% } %>
+      </div>
+    </section>
+
+    <!-- Background -->
+    <div class="shadow_bg hidden"></div>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+  </body>
+</html>

@@ -1,0 +1,524 @@
+<style>
+  .modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 1000;
+  }
+  .modal[aria-hidden='false'] {
+    display: block;
+  }
+  .modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .modal__card {
+    position: relative;
+    max-width: 900px;
+    margin: 10vh auto;
+    background: #fff;
+    border-radius: 1.6rem;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  }
+  .modal__close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 4rem;
+    --ionicon-stroke-width: 2.8rem;
+    line-height: 1;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .modal__close:hover {
+    color: #fd5353;
+  }
+  .modal__content {
+    display: grid;
+    grid-template-columns: 20rem 52rem;
+    grid-template-rows: 42rem;
+    /* align-items: center; */
+    justify-content: space-around;
+  }
+  .modal__left {
+    display: grid;
+    align-items: center;
+    /* place-items: center;  */
+  }
+  .modal_img-box {
+    /* background: #eee; */
+    padding: 2.8rem;
+    border-radius: 2rem;
+    width: 26rem;
+    overflow: hidden;
+  }
+  .modal__left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 38rem;
+    border-radius: 1rem;
+    box-shadow: 1rem 2rem 2rem rgba(0, 0, 0, 0.35);
+    transition: all 0.2s ease;
+  }
+  .modal_img-box img:hover {
+    transform: translateY(-0.2rem) scale(1.06);
+  }
+  .modal__right {
+    padding: 3.8rem 2.8rem;
+  }
+  .modal__category {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    color: #444;
+    background-color: #e0e0f9;
+    text-transform: uppercase;
+  }
+  .modal__title {
+    margin: 0 0 6px;
+    font-size: 2.6rem;
+    line-height: 1.25;
+  }
+  .modal__author {
+    color: #4b5563;
+    margin-bottom: 14px;
+  }
+  .modal__desc {
+    color: #374151;
+    font-size: 1.5rem;
+    line-height: 1.55;
+    margin: 0 0 18px;
+    white-space: pre-wrap;
+  }
+  .modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    margin-top: 3rem;
+  }
+  .modal__price {
+    font-size: 2rem;
+    color: #3f51b5;
+    font-weight: 700;
+  }
+  .btn {
+    border: 0;
+    font-size: 1.66rem;
+    font-family: inherit;
+    padding: 0.4rem 6rem;
+    border-radius: 2rem;
+    cursor: pointer;
+  }
+  .btn--primary {
+    background: #111827;
+    color: #fff;
+  }
+  @media (max-width: 760px) {
+    .modal__content {
+      grid-template-columns: 1fr;
+    }
+    .modal__card {
+      margin: 3vh 12px;
+    }
+  }
+</style>
+
+<main>
+  <section class="title-section">
+    <div class="title-box">
+      <% if (typeof categoryName !== "undefined" && categoryName) { %>
+      <h1><%= categoryName %> Books</h1>
+      <% } else { %>
+      <h1>Books</h1>
+      <% } %>
+
+      <p>Get crazy and let us introduce you to your next favorite read.</p>
+    </div>
+    <div class="tool-box">
+      <button class="btn_tool btn-request" onclick="openPopup(this)">
+        Request a Book
+      </button>
+
+      <!-- Overlay + Popup (Initially hidden) -->
+      <div class="overlay" onclick="closePopup()" id="statusPopup">
+        <div class="popup-card" onclick="event.stopPropagation()">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 1.8rem;
+            "
+          >
+            <h3>Request a Book</h3>
+            <ion-icon onclick="closePopup()" name="close-outline"></ion-icon>
+          </div>
+
+          <!-- Form -->
+          <form
+            id="requestForm"
+            class="action-form"
+            method="post"
+            action="/requested_book"
+          >
+            <div class="status-box">
+              <label for="name" class="shipped">Book name</label>
+              <input type="text" id="name" name="book_name" required />
+            </div>
+            <div class="status-box">
+              <label for="author" class="shipped">Author</label>
+              <input type="text" id="author" name="author" required />
+            </div>
+
+            <div class="popup-actions">
+              <button type="button" onclick="closePopup()">Cancel</button>
+              <button type="submit">Save</button>
+            </div>
+          </form>
+
+          <!-- Success/Error Message -->
+          <div
+            id="requestMessage"
+            style="
+              display: none;
+              flex-direction: column;
+              align-items: center;
+              gap: 1.2rem;
+            "
+          >
+            <img id="requestIcon" width="40" src="/images/check.png" alt="" />
+            <span
+              id="requestText"
+              style="
+                text-align: center;
+                font-size: 1.6rem;
+                height: 10rem;
+                font-weight: 600;
+                margin-top: 1rem;
+              "
+            ></span>
+          </div>
+        </div>
+      </div>
+
+      <button id="sortBooks" class="btn_tool btn-sort" type="button">
+        <ion-icon name="options-outline"></ion-icon>
+      </button>
+
+      <div class="sort-dropdown" id="sortDropdown">
+        <ul>
+          <li data-sort="price-high">Price: High → Low</li>
+          <li data-sort="price-low">Price: Low → High</li>
+          <li data-sort="id-asc">Book ID: Ascending</li>
+          <li data-sort="id-desc">Book ID: Descending</li>
+        </ul>
+      </div>
+
+      <ion-icon class="icon_grid" name="grid-outline"></ion-icon>
+    </div>
+  </section>
+
+  <!-- Books Grid -->
+  <section class="books-container">
+    <% if (data.length === 0) { %>
+    <p class="no-books">No books found. Start by adding one!</p>
+    <% } else { %> <% data.forEach((entry, index) => { %>
+    <div id="<%= index + 1 %>" class="book-card">
+      <!-- Book Image Section -->
+      <div class="box_img">
+        <div id="ion" class="icon">
+          <ion-icon class="ion heart-icon" name="heart-outline"></ion-icon>
+        </div>
+
+        <!-- Trigger button — now carries data-* we use to populate the modal -->
+        <button
+          class="book-trigger"
+          type="button"
+          style="border: none; background: none"
+          aria-haspopup="dialog"
+          aria-controls="book-modal"
+          data-id="<%= entry.book_id %>"
+          data-cate="<%= entry.cate %>"
+          data-name="<%= entry.book_name %>"
+          data-author="<%= entry.author %>"
+          data-desc="<%- entry.descp %>"
+          data-price="<%= entry.price %>"
+          data-img="/images/book_img/<%= entry.file_name %>"
+        >
+          <img
+            src="/images/book_img/<%= entry.file_name %>"
+            alt="<%= entry.book_name %>"
+            class="book_img"
+          />
+        </button>
+      </div>
+
+      <!-- Book Content Section -->
+      <div class="book-content">
+        <h4 class="cate"><%= entry.cate %></h4>
+        <h2 class="book-title"><%= entry.book_name %></h2>
+        <h4 class="author">by <%= entry.author %></h4>
+        <span class="price">₹ <%= entry.price %>/-</span>
+      </div>
+
+      <!-- Book Actions -->
+      <button class="btn-primary add-to-cart" data-id="<%= entry.book_id %>">
+        Add to Cart
+      </button>
+    </div>
+    <% }); %> <% } %>
+  </section>
+  <!-- Popup Product Card (Modal) -->
+  <div
+    id="book-modal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="modalTitle"
+  >
+    <div class="modal__backdrop" data-close></div>
+
+    <div class="modal__card" role="document">
+      <button class="modal__close" type="button" aria-label="Close" data-close>
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+
+      <div class="modal__content">
+        <div class="modal__left">
+          <div class="modal_img-box">
+            <img id="modalImg" src="" alt="" />
+          </div>
+        </div>
+
+        <div class="modal__right">
+          <div class="modal__category" id="modalCategory"></div>
+          <h2 class="modal__title" id="modalTitle"></h2>
+          <div class="modal__author" id="modalAuthor"></div>
+          <p class="modal__desc" id="modalDesc"></p>
+
+          <div class="modal__footer">
+            <div class="modal__price"><span id="modalPrice"></span></div>
+            <button id="modalAddToCart" class="btn btn--primary" type="button">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  function openPopup(button) {
+    document.getElementById('statusPopup').style.display = 'flex';
+  }
+
+  function closePopup() {
+    document.getElementById('statusPopup').style.display = 'none';
+  }
+
+  const sortBtn = document.getElementById('sortBooks');
+  const sortDropdown = document.getElementById('sortDropdown');
+  const container = document.querySelector('.books-container');
+  let cards = Array.from(container.querySelectorAll('.book-card'));
+
+  // Toggle dropdown
+  sortBtn.addEventListener('click', () => {
+    sortDropdown.style.display =
+      sortDropdown.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Close dropdown if clicked outside
+  document.addEventListener('click', (e) => {
+    if (!sortBtn.contains(e.target) && !sortDropdown.contains(e.target)) {
+      sortDropdown.style.display = 'none';
+    }
+  });
+
+  // Sorting logic
+  sortDropdown.querySelectorAll('li').forEach((item) => {
+    item.addEventListener('click', () => {
+      const sortType = item.dataset.sort;
+
+      cards.sort((a, b) => {
+        const priceA = parseFloat(
+          a
+            .querySelector('.price')
+            .innerText.replace('₹', '')
+            .replace('/-', '')
+            .trim()
+        );
+        const priceB = parseFloat(
+          b
+            .querySelector('.price')
+            .innerText.replace('₹', '')
+            .replace('/-', '')
+            .trim()
+        );
+        const idA = parseInt(a.querySelector('.add-to-cart').dataset.id);
+        const idB = parseInt(b.querySelector('.add-to-cart').dataset.id);
+
+        if (sortType === 'price-high') return priceB - priceA;
+        if (sortType === 'price-low') return priceA - priceB;
+        if (sortType === 'id-asc') return idA - idB;
+        if (sortType === 'id-desc') return idB - idA;
+      });
+
+      // Re-append sorted cards
+      cards.forEach((card) => container.appendChild(card));
+
+      // Close dropdown after selecting
+      sortDropdown.style.display = 'none';
+    });
+  });
+
+  (function () {
+    const modal = document.getElementById('book-modal');
+    const imgEl = document.getElementById('modalImg');
+    const catEl = document.getElementById('modalCategory');
+    const titleEl = document.getElementById('modalTitle');
+    const authorEl = document.getElementById('modalAuthor');
+    const descEl = document.getElementById('modalDesc');
+    const priceEl = document.getElementById('modalPrice');
+    const addBtn = document.getElementById('modalAddToCart');
+
+    let lastFocused = null;
+
+    function formatINR(val) {
+      const n = Number(val);
+      if (Number.isNaN(n)) return val || '';
+      return (
+        '₹ ' +
+        n.toLocaleString('en-IN', {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 2,
+        })
+      );
+    }
+
+    function openModal(fromBtn) {
+      lastFocused = fromBtn || document.activeElement;
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      // focus first interactive element inside modal
+      (modal.querySelector('.modal__close') || modal).focus({
+        preventScroll: true,
+      });
+    }
+
+    function closeModal() {
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocused && typeof lastFocused.focus === 'function')
+        lastFocused.focus();
+    }
+
+    // Global click delegation
+    document.addEventListener('click', function (e) {
+      const trigger = e.target.closest('.book-trigger');
+      const closer = e.target.closest('[data-close]');
+
+      if (trigger) {
+        const d = trigger.dataset;
+        imgEl.src = d.img;
+        imgEl.alt = d.name || 'Book cover';
+        catEl.textContent = d.cate || '';
+        titleEl.textContent = d.name || '';
+        authorEl.textContent = d.author ? `by ${d.author}` : '';
+        descEl.textContent = d.desc || '';
+        priceEl.textContent = formatINR(d.price);
+        addBtn.dataset.id = d.id || '';
+        openModal(trigger);
+      }
+
+      if (closer && modal.getAttribute('aria-hidden') === 'false') {
+        closeModal();
+      }
+    });
+
+    // ESC to close
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+        e.preventDefault();
+        closeModal();
+      }
+    });
+
+    // Add-to-cart inside modal (wire to your backend as needed)
+    addBtn.addEventListener('click', async function () {
+      const bookId = this.dataset.id;
+      // TODO: replace with your real cart logic (fetch/POST)
+      console.log('Add to cart -> book_id:', bookId);
+      // Small UX feedback
+      const original = addBtn.textContent;
+      addBtn.disabled = true;
+      addBtn.textContent = 'Added!';
+      setTimeout(() => {
+        addBtn.disabled = false;
+        addBtn.textContent = original;
+        closeModal();
+      }, 800);
+    });
+  })();
+
+  // //  //
+  // request a book handler
+  // // //
+  document
+    .getElementById('requestForm')
+    .addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+      const body = Object.fromEntries(formData);
+
+      try {
+        const res = await fetch('/requested_book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+
+        const data = await res.json();
+
+        // Hide the form
+        form.style.display = 'none';
+
+        // Show success/error message
+        const msgBox = document.getElementById('requestMessage');
+        const msgText = document.getElementById('requestText');
+        const msgIcon = document.getElementById('requestIcon');
+
+        msgText.textContent = data.message;
+        msgBox.style.display = 'flex';
+
+        if (data.success) {
+          msgIcon.src = '/images/check.png';
+          msgText.style.color = 'green';
+        } else {
+          msgIcon.src = '/images/error.png'; // add an error icon if you have one
+          msgText.style.color = 'red';
+        }
+
+        // After 3 seconds → reset UI
+        setTimeout(() => {
+          msgBox.style.display = 'none';
+          form.style.display = 'block';
+          form.reset();
+        }, 8000);
+      } catch (err) {
+        console.error(err);
+      }
+    });
+</script>

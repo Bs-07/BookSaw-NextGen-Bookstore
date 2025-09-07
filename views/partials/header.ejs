@@ -1,0 +1,263 @@
+    <style>
+        .delete-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.15);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        }
+
+        .delete-modal-content {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 12px;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .delete-modal-actions {
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        }
+
+        @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    
+    <div class="notification" id="promoNotification">
+        <ion-icon name="ticket-outline"></ion-icon>
+        <p>
+            Get 25% Off on Your First Order!
+            <button class="copy-btn" onclick="copyCode(this)">
+            USE CODE: <span style="color: rgb(142, 142, 245); font-weight: 600;">WELCOME25</span>
+            <span class="tooltiptext">Copy to clipboard</span>
+            </button>
+        </p>
+        <ion-icon class="close-notification" name="close-outline"></ion-icon>
+    </div>
+      <header>
+        <div class="nav_section">
+          <!-- Left: Logo -->
+          <div class="nav_left">
+            <a href="/">
+              <img class="logo" src="/images/main-logo.png" alt="logo" />
+            </a>
+          </div>
+
+          <!-- Middle: Nav Links -->
+          <div class="nav_center">
+            <li class="nav_list">
+              <li class="nav_item">
+                <a
+                  href="/back_home"
+                  class="nav_link <%= currentPage === 'home' ? 'active' : '' %>"
+                  >Home</a
+                >
+              </li>
+              <li class="nav_item">
+                <a
+                  href="/books_user"
+                  class="nav_link <%= currentPage === 'books' ? 'active' : '' %>"
+                  >Books</a
+                >
+              </li>
+              <li class="nav_item dropdown">
+                <a style="display: flex; align-items: center;"
+                  href="#"
+                  class="nav_link <%= currentPage === 'category' ? 'active' : '' %>"
+                >
+                <span>
+                    Category 
+                </span>
+                  <ion-icon
+                    class="dropdown_icon"
+                    name="chevron-down-outline"
+                  ></ion-icon>
+                </a>
+              
+                <!-- DROPDOWN MENU -->
+                <ul class="dropdown_menu">
+                  <li><a href="Act&dAd">Action and Adventure</a></li>
+                  <li><a href="Autography">Autography</a></li>
+                  <li><a href="Biography">Biography</a></li>
+                  <li><a href="Bus&Eco">Business & Economics</a></li>
+                  <li><a href="Det&My">Detective and Mystery</a></li>
+                  <li><a href="Fantasy">Fantasy novel</a></li>
+                  <li><a href="personal">Personal Development</a></li>
+                  <li><a href="History">History</a></li>
+                  <li><a href="Novel">Novel</a></li>
+                  <li><a href="Philosophy">Philosophy</a></li>
+                  <li><a href="SciFi">SciFi</a></li>
+                  <li><a href="Science">Science</a></li>
+                  <li><a href="Spirit">Spirituality</a></li>
+                </ul>
+              </li>
+              
+              <li class="nav_item">
+                <a
+                  href="/show_orders"
+                  class="nav_link <%= currentPage === 'orders' ? 'active' : '' %>"
+                  >Orders</a
+                >
+              </li>
+              <li class="nav_item">
+                <a
+                  href="/wishlist"
+                  class="nav_link <%= currentPage === 'about' ? 'active' : '' %>"
+                  >About</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right: Search, Wishlist, Cart, Profile/Login -->
+          <div class="nav_right">
+            <a href="/wishlist" class="icon_btn"
+              ><ion-icon name="heart-outline"></ion-icon
+            ></a>
+            <a href="/show_cart" class="icon_btn"
+              ><ion-icon name="bag-outline"></ion-icon
+            ></a>
+
+            <% if (!user) { %>
+                <a href="/login" class="profile_btn">Login</a>
+                <a href="/reg" class="profile_btn sign_up">Sign Up</a>
+              <% } else { %>
+                <div class="profile_dropdown">
+                    <a href="#" style="font-size: 1.7rem;" class="profile">Hi, <%= user %></a>
+                    <ul class="profile_menu">
+                      <li>
+                        <div class="profile_header">
+                            <img src="/images/profile.jpg" alt="profile pic" class="avatar_large" />
+                            <p class="user_email"><%= uEmail %></p>
+                        </div>
+                      </li>
+                      <li>
+                            <a id="manageAccountBtn" href="#">
+                                <ion-icon  name="settings-outline"></ion-icon>
+                              Manage account
+                            </a>
+                      </li>
+                      <li>
+                        <a href="logout" class="logout">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </div>                  
+              <% } %>
+              
+            <!-- Profile popup -->
+            <div id="profileModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Manage Profile</h2>
+
+                <form action="/updateProfile" method="POST" class="form-grid">
+                <!-- LEFT SIDE -->
+                <div class="form-left">
+                    <label for="profileName">Name</label>
+                    <input type="text" id="profileName" name="name" required />
+
+                    <label for="profileEmail">Email</label>
+                    <input type="email" id="profileEmail" name="email" readonly />
+
+                    <label for="profileMobile">Mobile</label>
+                    <input type="text" id="profileMobile" name="mobile" />
+
+                    <label for="profileAddress">Address</label>
+                    <textarea id="profileAddress" name="address"></textarea>
+                </div>
+
+                <!-- RIGHT SIDE -->
+                <div class="form-right">
+                    <label for="profileCity">City</label>
+                    <input type="text" id="profileCity" name="city" />
+
+                    <label for="profilePin">PIN Code</label>
+                    <input type="number" id="profilePin" name="pin" />
+
+                    <label for="profileState">State</label>
+                    <select id="profileState" name="state" required>
+                    <option value="">-- Select State --</option>
+                    <% [
+                        "Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh","Assam","Bihar",
+                        "Chandigarh","Chhattisgarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Goa",
+                        "Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka",
+                        "Kerala","Ladakh","Lakshadweep","Madhya Pradesh","Maharashtra","Manipur","Meghalaya",
+                        "Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu",
+                        "Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal"
+                    ].forEach(st => { %>
+                        <option value="<%= st %>"><%= st %></option>
+                    <% }) %>
+                    </select>
+
+                    <label for="profileCountry">Country</label>
+                    <input type="text" id="profileCountry" name="country" value="India" readonly />
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="form-actions">
+                <!-- Delete button -->
+                <button type="button" class="btnProfile delete" id="deleteProfileBtn">
+                Delete
+                </button>
+
+                <!-- Confirmation Modal -->
+                <div id="deleteModal" class="delete-modal hidden">
+                <div class="delete-modal-content">
+                    <h2>Delete Profile</h2>
+                    <p style="font-size: 1.38rem;">Are you sure you want to delete your profile? This action cannot be undone.</p>
+                    <div class="delete-modal-actions">
+                    <form method="post" action="/deleteProfile">
+                        <button type="submit" class="btnProfile delete">Yes, Delete</button>
+                    </form>
+                    <button type="button" class="btnProfile cancel" id="cancelDeleteBtn">Cancel</button>
+                    </div>
+                </div>
+                </div>
+                    </button>
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                    <button type="button" class="btnProfile cancel">Cancel</button>
+                    <button type="submit" class="btnProfile save">Save Changes</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            </div>
+              
+          </div>
+        </div>
+      </header>
+
+      <script>
+      document.addEventListener("DOMContentLoaded", () => {
+  const deleteBtn = document.getElementById("deleteProfileBtn");
+  const modal = document.getElementById("deleteModal");
+  const cancelBtn = document.getElementById("cancelDeleteBtn");
+
+  deleteBtn.addEventListener("click", () => {
+    modal.style.display = "flex"; // show modal
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    modal.style.display = "none"; // close modal
+  });
+
+  // Close if clicking outside content
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+});
+      </script>

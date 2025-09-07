@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | Booksaw.co</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Ionicons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body>
+    <% if (error) { %>
+    <div class="alert alert-danger">! <%= error %> !</div>
+    <% } %>
+    <section class="signup-section">
+      <div class="signup-container">
+        <!-- Form Section -->
+        <div class="form-section">
+          <a class="logo-box" href="/">
+            <img class="logo" src="/images/main-logo.png" alt="Booksaw Logo" />
+          </a>
+          <h1>Create Your Account</h1>
+          <!-- Change 'action' to your actual sign-up route, e.g. /regProcess -->
+          <form
+            class="signup-form"
+            action="/regProcess"
+            method="post"
+            id="form"
+          >
+            <div class="input-box">
+              <label for="name">Name</label>
+              <input
+                class="input-field"
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+            <div class="input-box">
+              <label for="email">Email</label>
+              <input
+                class="input-field"
+                type="text"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="input-box">
+              <label for="pwd">Password</label>
+              <input
+                class="input-field"
+                type="password"
+                name="pwd"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+            <!-- <div class="input-box">
+              <label for="confirmPwd">Confirm Password</label>
+              <ion-icon class="icon" name="key-outline"></ion-icon>
+              <input
+                class="input-field"
+                type="password"
+                name="confirmPwd"
+                placeholder="Re-enter password"
+                required
+              />
+            </div> -->
+            <button class="btn">
+              <span>Sign Up</span>
+            </button>
+            <div class="helper-links">
+              <a href="/login" class="small-link">Already have an account?</a>
+            </div>
+            <div class="social"></div>
+          </form>
+        </div>
+
+        <!-- Image / Illustration Section -->
+        <div class="image-section">
+          <div class="bg-color"></div>
+          <div class="bg-img"></div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

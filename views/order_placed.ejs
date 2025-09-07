@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booksaw.co</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Rubik:wght@500&&family=Water+Brush&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/order_placed.css" />
+  </head>
+  <body>
+    <section class="order_place__section">
+      <div class="op_container">
+        <div class="op_icon_box">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </div>
+        <div class="txt_box">
+          <h1>Thank you <%=user%> for your order!</h1>
+          <p>The order confirmation has been send to your email address</p>
+        </div>
+        <div class="order_detail--box">
+          <div class="op_flex-box">
+            <p>₹<%= totalAmount.toFixed(2) %></p>
+            <span>Total amount</span>
+          </div>
+          <div class="op_flex-box">
+            <p>x<%= totalItems %></p>
+            <span>Items order</span>
+          </div>
+          <div class="op_flex-box">
+            <% const dateObj = new Date(deliveryDate); %> <% const day = ('0' +
+            dateObj.getDate()).slice(-2); %> <% const month = ('0' +
+            (dateObj.getMonth() + 1)).slice(-2); %> <% const year =
+            dateObj.getFullYear(); %>
+            <p><%= day %>.<%= month %>.<%= year %></p>
+            <span>Est. Delivery</span>
+          </div>
+        </div>
+        <div class="op_btn-box">
+          <a href="/show_orders" class="btn_op btn--white">View Order</a>
+          <a href="/books_user" class="btn_op">Continue Shopping</a>
+        </div>
+        <div class="co2">
+          <ion-icon name="help-circle-outline"></ion-icon>
+          <h2>Your delivery is CO2 neutral.</h2>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script>
+    const profile = document.querySelector('.profile');
+    const box = document.getElementById('pro_box');
+
+    profile.addEventListener('click', (el) => {
+      box.classList.toggle('hidden');
+      console.log('hello');
+    });
+  </script>
+</html>

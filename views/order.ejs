@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booksaw.co</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Rubik:wght@500&&family=Water+Brush&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- <script defer src="/js/coupon_Code.js"></script>
+    <script defer src="/js/count.js"></script> -->
+    <script defer src="/js/delivery_date.js"></script>
+    <script defer src="/js/copy.js"></script>
+
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/order.css" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <%- include('partials/header') %>
+
+    <!--* Checkout-Section -->
+    <section class="checkout_section">
+      <div class="detail_container">
+        <div style="display: flex; align-items: center;justify-content: space-between;">
+        <h2>Delivery Details</h2>
+        <a href="update_detail?totalSum=<%= totalSum %>"><ion-icon class="icon_edit" name="create-outline"></ion-icon></a>
+        </div>
+        <%data.deliveryDetails.forEach((entry,index)=>{%>
+        <div class="delv_box">
+          <div>
+            <p class="main"><%=entry.u_name%></p>
+            <!-- <p class="sub"><%=entry.u_email%></p> -->
+          </div>
+          <div>
+            <span class="add"><%=entry.address%>,</span>
+            <span class="add"> <%=entry.city%></span>
+            <span class="add">- <%=entry.pin%></span>
+            <span class="add">, <%=entry.state%></span>
+            <span class="add">, <%=entry.country%></span>
+          </div>
+          <p class="mob">Mob: +91<%=entry.u_mobileNo%></p>
+        </div>
+      </div>
+      <!-- <div class="Schedule_container">
+        <h1>Delivery Schedule</h1>
+        <div class="schd_box">
+          <div class="group_label">
+            <label for="date">Delivered by: </label>
+            <p><%=entry.delivery_date%></p>
+          </div>
+          <div class="group_label">
+            <label for="email">Note:</label>
+            <p><%=entry.delivery_note%></p>
+          </div>
+        </div>
+      </div> -->
+    </form>
+  </div>
+</div>
+<%});%>
+<!--* Schedule and payment -->
+<!-- *======================================================== -->
+<form class="payment_op" action="orderProcess" method="post">
+<div class="Schedule_container">
+  <h2>Schedule Delivery</h2>
+  <div class="schd_box">
+    <div class="group_label">
+      <label for="date">Choose a date: (4 days for delivery)</label>
+      <input
+        class="input_form date"
+        type="date"
+        min="2024-04-05"
+        max="2024-04-08"
+        name="deliveryDate"
+        id="date"
+        required
+      />
+    </div>
+    <div class="group_label">
+      <label for="email">Note</label>
+      <input class="input_form" type="text" name="note" required />
+    </div>
+  </div>
+</div>
+
+<div class="payment_box">
+        <h2>Payment Method</h2>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 2rem;margin-bottom: 2rem; ">
+          <div class="form__radio--group">
+            <input
+              type="radio"
+              name="paymentMethod"
+              id="op"
+              value="Net Banking"
+              class="form__radio--input"
+              required
+            />
+            <label for="op" class="form__radio--label">
+              <span class="form__radio-button"></span>
+              Net Banking
+            </label>
+          </div>
+          <div class="form__radio--group">
+            <input
+              type="radio"
+              name="paymentMethod"
+              id="cod"
+              value="UPI"
+              class="form__radio--input"
+              required
+            />
+            <label for="cod" class="form__radio--label">
+              <span class="form__radio-button"></span>
+              UPI
+            </label>
+          </div>
+          <div class="form__radio--group">
+            <input
+              type="radio"
+              value="COD"
+              name="paymentMethod"
+              id="m"
+              class="form__radio--input"
+              required
+            />
+            <label for="m" class="form__radio--label">
+              <span class="form__radio-button"></span>
+              Cash on Delivery
+            </label>
+          </div>
+        </div>
+        <input type="hidden" name="totalAmount" value="<%= totalSum %>" >
+        <button class="btn_order" type="submit">Place order</button>
+        </form>
+      </div>
+        </div>
+      </div>
+
+      <!--* Order details  -->
+      <div class="order-detail_section">
+        <div class="main-order_box">
+          <h2>Order Summery</h2>
+          <div class="summery">
+          <%data.cartItems.forEach((entry,index)=>{%>
+          <div class="order_box">
+            <div class="img_box">
+              <img
+                class="img"
+                src="/images/book_img/<%=entry.file_name%>"
+                alt=""
+              />
+            </div>
+            <div class="C_box_txt">
+              <h4><%=entry.book_name%></h4>
+              <span><%=entry.author%></span>
+            </div>
+            <div class="tol_price">
+              <span>₹</span>
+              <span class="price"><%=entry.price%></span>
+            </div>
+          </div>
+          <%});%>
+          <div class="place_order">
+            <div class="flex_box-total subTotal_box">
+              <span>Subtotal</span>
+              <div>
+                <span>₹</span>
+                <span class="totalSum"><%= totalSum %></span>
+              </div>
+            </div>
+            <div class="flex_box-total subTotal_box">
+              <span>Shipping</span>
+              <div>
+                <span style="color: orangered;">Free</span>
+              </div>
+            </div>
+            <div style="border-top: 1px solid #ddd;
+            margin-top: 2rem;
+            padding: 1rem 0rem;" class="flex_box-total tol_price">
+              <span>Total</span>
+              <div>
+                <span>₹</span>
+                <span class="totalSu"><%= totalSum %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- Footer -->
+    <%- include('partials/footer') %>
+  </body>
+</html>

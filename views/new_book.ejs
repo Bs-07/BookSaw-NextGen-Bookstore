@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="/js/chart-config.js" defer></script>
+
+
+    <script defer src="/js/new_book.js"></script>
+    <script defer src="/js/admin.js"></script>
+
+    <link rel="stylesheet" href="css/admin.css" />
+    <!-- <link rel="stylesheet" href="css/table.css" /> -->
+
+    <link rel="stylesheet" href="/css/all_book.css" />
+  </head>
+  <body>
+    <section class="main_section">
+        <%- include('partials/admin_nav') %>
+
+      <div class="main_container">
+        <div class="header_box">
+          <h1 class="heading">Welcome back ! <%= aname %></h1>
+          <div class="greeting_box">
+            <div id="greetGif"></div>
+            <span id="greet" class="sub_txt">Good Afternoon</span>
+          </div>
+        </div>
+        <!-- Load Tenor embed script (only once per page) -->
+        <script
+          type="text/javascript"
+          async
+          src="https://tenor.com/embed.js"
+        ></script>
+
+        <div class="bookAnalytics-container">
+          <!-- <div class="bookBox half_row">
+            <div class="bookBox-heading">
+              <span>Total Books</span>
+              <ion-icon class="pending" name="ellipse"></ion-icon>
+            </div>
+            <div class="bookBox-detail">
+              <h3 class="main_txt"><%= totalBooks %></h3>
+              <div>
+                  <ion-icon name="caret-up-outline"></ion-icon>
+                  <span class="sub_txt">30%</span>
+                </div>
+            </div>
+        </div> -->
+        <div class="bookBox full_row">
+          <div class="bestSellerCate">
+            <span>Best Selling Book Category</span>
+          </div>
+          <div class="bookBox-detail">
+              <canvas id="bestSellingChart" width="88" height="40"></canvas>
+          </div>
+        </div>
+          <div class="bestBook remain_row">
+            <div>
+                <h1>Best Selling Book</h1>
+            </div>
+              <div class="bestBook-sub">
+                <% if (bestSellerBook) { %>
+                    <div class="img-box">
+                        <img class="img" src="/images/book_img/<%= bestSellerBook.file_name %>" alt="" srcset="">
+                    </div>
+                    <!-- <p><strong>Title:</strong> <%= bestSellerBook.book_name %></p> -->
+                    <p class="totalSold">Total Sold <br><span><%= bestSellerBook.total_sold %></span></p>
+                    <p> <strong>By</strong> <%= bestSellerBook.author %></p>
+                <% } else { %>
+                    <p>No sales data available yet.</p>
+                <% } %>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+            <div class="header-flex">
+                <div class="heading-book">
+                    <h1 class="title">All Books <span
+                style="
+                  font-size: 1.4rem;
+                  color: #fff;
+                  background-color: #333;
+                  border-radius: 2rem;
+                  padding: 0.1rem 0.8rem;
+                "
+                ><%= totalBooks %></span
+              ></h1>
+                    <p class="subtitle">
+                        All added books are shown here.
+                    </p>
+                </div>
+                <div class="option_box">
+                    <a class="addBook_btn" href="/addNewBook">+ Add new books</a>
+                    <a id="sortBooks" class="btn" href="#"><ion-icon name="options-outline"></ion-icon></a>
+                    <div class="dropdown" id="sortDropdown">
+                        <ul>
+                            <li data-sort="price-high">Price: High → Low</li>
+                            <li data-sort="price-low">Price: Low → High</li>
+                            <li data-sort="id-asc">Book ID: Ascending</li>
+                            <li data-sort="id-desc">Book ID: Descending</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="card">
+            <div class="table-wrap">
+            <table class="modern-table" aria-label="Books table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Book</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% data.forEach((entry, index) => { %>
+                    <tr>
+                    <td><%= index + 1 %></td>
+                    <td class="book-cell">
+                        <img class="thumb" src="/images/book_img/<%= entry.file_name %>" alt="<%= entry.book_name %>">
+                        <div class="meta">
+                        <div class="name"><%= entry.book_name %></div>
+                        <div class="muted">ID: <%= entry.book_id %></div>
+                        </div>
+                    </td>
+                    <td><span class="badge"><%= entry.cate %></span></td>
+                    <td><%= entry.author %></td>
+                    <td>₹<%= entry.price %>/-</td>
+                    <td>
+                        <div class="action-cell">
+                            <button type="button" class="edit-btn" data-book-id="<%= entry.book_id %>" onclick="openPopup(this)">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </button>
+                            <a class="delete-btn" href="del_book?bookId=<%= entry.book_id %>">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </a>
+                        </div>
+                    </td>
+                    </tr>
+                <% }) %>
+                </tbody>
+            </table>
+
+            <!-- Overlay + Popup (Initially hidden) -->
+            <div class="overlay" onclick="closePopup()" id="statusPopup">
+              <div class="popup-card" onclick="event.stopPropagation()">
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 1.8rem;
+                  "
+                >
+                  <h3>Update Book Price</h3>
+                  <ion-icon
+                    onclick="closePopup()"
+                    name="close-outline"
+                  ></ion-icon>
+                </div>
+                <form
+                  class="action-form"
+                  name="action_form"
+                  action="/updateBook_Price"
+                  method="post"
+                >
+                  <input
+                    type="hidden"
+                    name="bookId"
+                    id="bookIdField"
+                  />
+                  <div class="status-box">
+                      <label for="price" class="shipped"> New Price </label>
+                    <input
+                      type="text"
+                      id="price"
+                      name="new_price"
+                    />
+                  </div>
+
+                  <div class="popup-actions">
+                    <button type="button" onclick="closePopup()">Cancel</button>
+                    <button type="submit">Save</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+        </div>
+        </div>
+        </div>  
+      </div>
+
+      </div>
+    </section>
+    <script>
+            const sortBtn = document.getElementById("sortBooks");
+            const sortDropdown = document.getElementById("sortDropdown");
+            const tbody = document.querySelector(".modern-table tbody");
+            let rows = Array.from(tbody.querySelectorAll("tr"));
+
+            // Toggle dropdown on button click
+            sortBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                sortDropdown.style.display = sortDropdown.style.display === "block" ? "none" : "block";
+            });
+
+            // Close dropdown if clicked outside
+            document.addEventListener("click", (e) => {
+                if (!sortBtn.contains(e.target) && !sortDropdown.contains(e.target)) {
+                sortDropdown.style.display = "none";
+                }
+            });
+
+            // Sorting logic
+            sortDropdown.querySelectorAll("li").forEach((item) => {
+                item.addEventListener("click", () => {
+                const sortType = item.dataset.sort;
+
+                rows.sort((a, b) => {
+                    const priceA = parseFloat(a.cells[4].innerText.replace("₹","").replace("/-","").trim());
+                    const priceB = parseFloat(b.cells[4].innerText.replace("₹","").replace("/-","").trim());
+                    const idA = parseInt(a.querySelector(".muted").innerText.replace("ID:","").trim());
+                    const idB = parseInt(b.querySelector(".muted").innerText.replace("ID:","").trim());
+
+                    if (sortType === "price-high") return priceB - priceA;
+                    if (sortType === "price-low") return priceA - priceB;
+                    if (sortType === "id-asc") return idA - idB;
+                    if (sortType === "id-desc") return idB - idA;
+                });
+
+                // Re-append sorted rows
+                rows.forEach(row => tbody.appendChild(row));
+
+                // Hide dropdown after selection
+                sortDropdown.style.display = "none";
+                });
+            });
+
+
+        function openPopup(button) {
+            const bookId = button.getAttribute('data-book-id');
+            document.getElementById('bookIdField').value = bookId;
+            document.getElementById('statusPopup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('statusPopup').style.display = 'none';
+        }
+    </script>
+  </body>
+</html>

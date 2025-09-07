@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script defer src="/js/admin.js"></script>
+
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/admin_orders.css" />
+  </head>
+  <body>
+    <section class="main_section">
+      <%- include('partials/admin_nav') %>
+
+      <div class="main_container">
+        <div class="header_box">
+          <h1 class="heading">Welcome back ! <%= aname %></h1>
+          <div class="greeting_box">
+            <div id="greetGif"></div>
+            <span id="greet" class="sub_txt">Good Afternoon</span>
+          </div>
+        </div>
+        <!-- Load Tenor embed script (only once per page) -->
+        <script
+          type="text/javascript"
+          async
+          src="https://tenor.com/embed.js"
+        ></script>
+
+        <div class="container_1">
+          <div class="box">
+            <div class="box-heading">
+              <span>Pending Orders</span>
+              <ion-icon class="pending" name="ellipse"></ion-icon>
+            </div>
+            <div class="box-detail">
+              <h3 class="main_txt"><%= stats.pending_count %></h3>
+              <div>
+                <ion-icon name="caret-up-outline"></ion-icon>
+                <span class="sub_txt">30%</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-heading">
+              <span>Shipped Orders</span>
+              <ion-icon class="shipped" name="ellipse"></ion-icon>
+            </div>
+            <div class="box-detail">
+              <h3 class="main_txt"><%= stats.shipped_count %></h3>
+              <div>
+                <ion-icon name="caret-up-outline"></ion-icon>
+                <span class="sub_txt">30%</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-heading">
+              <span>Delivered Orders</span>
+              <ion-icon class="delivered" name="ellipse"></ion-icon>
+            </div>
+            <div class="box-detail">
+              <h3 class="main_txt"><%= stats.delivered_count %></h3>
+              <div>
+                <ion-icon name="caret-up-outline"></ion-icon>
+                <span class="sub_txt">30%</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-heading">
+              <span>Cancelled Orders</span>
+              <ion-icon class="cancelled" name="ellipse"></ion-icon>
+            </div>
+            <div class="box-detail">
+              <h3 class="main_txt"><%= stats.cancelled_count %></h3>
+              <div>
+                <ion-icon name="caret-up-outline"></ion-icon>
+                <span class="sub_txt">30%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container_2">
+          <div class="heading-book">
+            <h1 class="title">
+              Orders
+              <span
+                style="
+                  font-size: 1.4rem;
+                  color: #fff;
+                  background-color: #333;
+                  border-radius: 2rem;
+                  padding: 0.1rem 0.8rem;
+                "
+                ><%= stats.total_items %></span
+              >
+            </h1>
+            <p class="subtitle">All the orders are shown here.</p>
+          </div>
+          <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">
+              All orders
+            </button>
+            <button class="filter-btn" data-filter="pending">Pending</button>
+            <button class="filter-btn" data-filter="shipped">Shipped</button>
+            <button class="filter-btn" data-filter="delivered">
+              Delivered
+            </button>
+            <button class="filter-btn" data-filter="cancelled">
+              Cancelled
+            </button>
+          </div>
+
+          <div class="order-container">
+            <table class="order-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Book</th>
+                  <th>Customer</th>
+                  <th>Quantity</th>
+                  <th>Order Date</th>
+                  <th>Payment</th>
+                  <th>Delivery Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% data.forEach(row => { %>
+                <tr data-status="<%= row.status.trim().toLowerCase() %>">
+                  <td>#<%= row.order_id %></td>
+                  <td>
+                    <div class="book-info">
+                      <img
+                        src="/images/book_img/<%= row.file_name %>"
+                        alt="Book"
+                      />
+                      <div>
+                        <p class="book-name"><%= row.book_name %></p>
+                        <p class="book-author"><%= row.author %></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td><%= row.customer %></td>
+                  <td><%= row.quantity %></td>
+                  <td><%= new Date(row.order_date).toLocaleDateString() %></td>
+                  <td><%= row.payment_method %></td>
+                  <td>
+                    <%= row.delivery_date ? new
+                    Date(row.delivery_date).toLocaleDateString() : '' %>
+                  </td>
+                  <td>
+                    <span class="status <%= row.status.trim().toLowerCase() %>"
+                      ><%= row.status %></span
+                    >
+                  </td>
+                  <td class="td-status">
+                    <% const normalizedStatus = row.status ?
+                    row.status.trim().toLowerCase() : ""; %> <% if
+                    (normalizedStatus === 'delivered') { %>
+                    <button type="button" class="status-btn" disabled>
+                      <ion-icon name="checkmark-done-outline"></ion-icon>
+                    </button>
+                    <% } else if (normalizedStatus === 'cancelled') { %>
+                    <button type="button" class="status-btn" disabled>
+                      <ion-icon name="close-circle-outline"></ion-icon>
+                    </button>
+                    <% } else { %>
+                    <button
+                      type="button"
+                      class="status-btn"
+                      data-item-id="<%= row.id %>"
+                      onclick="openPopup(this)"
+                    >
+                      <ion-icon name="create-outline"></ion-icon>
+                    </button>
+                    <% } %>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+
+            <!-- Overlay + Popup (Initially hidden) -->
+            <div class="overlay" onclick="closePopup()" id="statusPopup">
+              <div class="popup-card" onclick="event.stopPropagation()">
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 1.8rem;
+                  "
+                >
+                  <h3>Update Order Status</h3>
+                  <ion-icon
+                    onclick="closePopup()"
+                    name="close-outline"
+                  ></ion-icon>
+                </div>
+                <form
+                  class="action-form"
+                  name="action_form"
+                  action="/updateOrder_Status"
+                  method="post"
+                >
+                  <input
+                    type="hidden"
+                    name="order_item_id"
+                    id="orderItemIdField"
+                  />
+                  <div class="status-box">
+                    <input
+                      type="radio"
+                      id="shipped"
+                      name="status"
+                      value="shipped"
+                    />
+                    <label for="shipped" class="shipped"> Shipped </label>
+                  </div>
+                  <div class="status-box">
+                    <input
+                      type="radio"
+                      id="delivered"
+                      name="status"
+                      value="delivered"
+                    />
+                    <label for="delivered" class="delivered"> Delivered </label>
+                  </div>
+                  <div class="status-box">
+                    <input
+                      type="radio"
+                      id="cancelled"
+                      name="status"
+                      value="cancelled"
+                    />
+                    <label for="cancelled" class="cancelled"> Cancelled </label>
+                  </div>
+
+                  <div class="popup-actions">
+                    <button type="button" onclick="closePopup()">Cancel</button>
+                    <button type="submit">Save</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          // Filter rows by status
+          const filterBtns = document.querySelectorAll('.filter-btn');
+          const rows = document.querySelectorAll('.order-table tbody tr');
+
+          filterBtns.forEach((btn) => {
+            btn.addEventListener('click', () => {
+              // toggle active button
+              filterBtns.forEach((b) => b.classList.remove('active'));
+              btn.classList.add('active');
+
+              const filter = btn.dataset.filter;
+
+              rows.forEach((row) => {
+                if (filter === 'all' || row.dataset.status === filter) {
+                  row.style.display = '';
+                } else {
+                  row.style.display = 'none';
+                }
+              });
+            });
+          });
+
+          function openPopup(button) {
+            const itemId = button.getAttribute('data-item-id');
+            document.getElementById('orderItemIdField').value = itemId;
+            document.getElementById('statusPopup').style.display = 'flex';
+          }
+
+          function closePopup() {
+            document.getElementById('statusPopup').style.display = 'none';
+          }
+        </script>
+      </div>
+    </section>
+  </body>
+</html>

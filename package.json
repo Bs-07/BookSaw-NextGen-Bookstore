@@ -1,0 +1,24 @@
+{
+  "name": "booksaw.co",
+  "version": "1.0.0",
+  "description": "It's an Modern Gen digital bookstore",
+  "homepage": "https://github.com/Bs-07/booksaw-free-version#readme",
+  "bugs": {
+    "url": "https://github.com/Bs-07/booksaw-free-version/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bs-07/booksaw-free-version.git"
+  },
+  "license": "ISC",
+  "author": "Bhoopendra_Singh07",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "multer": "^2.0.2"
+  }
+}

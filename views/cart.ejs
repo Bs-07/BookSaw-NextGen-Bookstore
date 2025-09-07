@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booksaw.co</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Rubik:wght@500&&family=Water+Brush&display=swap"
+      rel="stylesheet"
+    />
+
+    <script defer src="/js/cart_quantity.js"></script>
+    <script defer src="/js/coupon_Code.js"></script>
+    <script defer src="/js/copy.js"></script>
+
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/cart.css" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <%- include('partials/header') %>
+
+    <section class="section_cart">
+      <div class="cart_container">
+        <div class="head_box">
+          <div class="sub_box">
+          <h1>Cart</h1>
+          <%
+          var L=data.length;
+          %>
+          <span style="font-size: 1.2rem; margin-top: .8rem;">(<%=L%> products)</span>
+        </div>
+        <a class="clear_all" href="all_clear?em=<%=uEmail%>">Clear cart</a>
+        </div>
+        <div class="cart_items">
+          <%data.forEach((entry,index)=>{%>
+          <div class="cart_item">
+              <div class="cart_item--box">
+                <div class="img_box">
+                  <img
+                    class="img"
+                    src="/images/book_img/<%=entry.file_name%>"
+                    alt=""
+                  />
+                </div>
+                <div class="C_box_txt">
+                  <h4><%=entry.book_name%></h4>
+                  <span><%=entry.author%></span>
+                </div>
+
+                <form class="update-form" action="/update_quantity" method="POST">
+                    <input type="hidden" name="cart_id" value="<%= entry.cart_id %>" />
+                    <input type="hidden" name="quantity" class="quantity-input" value="<%= entry.quantity %>" />
+
+                    <div class="incr_box">
+                        <button class="quantity_btn" type="button" data-action="decrease">
+                            <span class="sign minus"><ion-icon name="remove-outline"></ion-icon></span>
+                        </button>
+
+                        <span class="count quantity-display"><%= entry.quantity %></span>
+                        
+                        <button class="quantity_btn" type="button" data-action="increase">
+                            <span class="sign plus"><ion-icon name="add-outline"></ion-icon></span>
+                        </button>
+                    </div>
+                </form>
+                
+                  
+                <div class="tol_price">
+                    <span>₹</span>
+                    <span class="price" data-price="<%= entry.price %>">
+                        <%= (entry.price * entry.quantity).toFixed(2) %>
+                    </span>
+                </div>
+                <a href="del_cart?id=<%=entry.cart_id%>"
+                  ><ion-icon class="icon_close" name="close-outline"></ion-icon
+                ></a>
+              </div>
+          </div>
+          <%});%>
+          </div>
+        </div>
+      </div>
+      <div class="checkout_container">
+          <div class="promo">
+            <span>Promo code </span>
+            <span style=" font-size: 1.25rem; font-weight: 600;" id="couponAlert"></span>
+            <div class="promo_box">
+                <input class="promo_code" type="text" name="promo" placeholder="Type here...">
+                <button class="btn_promo" type="button">Apply</button>
+            </div>
+            </div>
+        <form action="/show_checkout" method="post">
+        <div class="flex_box-total subTotal_box">
+          <span>Subtotal</span>
+          <div>
+            <span>₹</span>
+          <span class="totalSum">00.00</span></div>
+        </div>
+        <div class="flex_box-total dis_box">
+          <span>Discount</span>
+          <span class="discountAmount">-₹0.00</span>
+        </div>
+        <div class="flex_box-total dis_box">
+          <span>Tax(GST)</span>
+          <span>₹0.00</span>
+        </div>
+        <div class="flex_box-total dis_box">
+          <span>Shipping</span>
+          <span style="color: #d48930;">Free</span>
+        </div>
+        <div class="flex_box-total total_box">
+          <span>Total</span>
+          <div>
+          <span>₹</span>
+          <span class="totalSum">00.00</span></div>
+        </div>
+        
+        <input type="hidden" name="couponCode" id="hiddenCoupon">
+        <input type="hidden" name="discount" id="hiddenDiscount">
+        <input type="hidden" name="totalSum" id="hiddenTotal">
+
+
+        <button class="btn_checkout" type="submit">Continue to checkout</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+  </body>
+</html>

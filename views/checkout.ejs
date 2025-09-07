@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booksaw.co</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Rubik:wght@500&&family=Water+Brush&display=swap"
+      rel="stylesheet"
+    />
+
+    <script defer src="/js/copy.js"></script>
+
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/checkout.css" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <%- include('partials/header') %>
+
+    <!--* Checkout-Section -->
+    <section class="checkout_section">
+        <!-- Delivery Details Form -->
+        <div class="detail_container">
+          <h2 class="section_heading">Delivery Details</h2>
+          <form class="detail_form" action="detailProcess" method="post">
+
+            <!-- Row 1 -->
+            <div class="form_row">
+              <div class="form_group">
+                <label for="name">Name</label>
+                <input type="text" class="input_form" value="<%= user %>" disabled />
+              </div>
+              <div class="form_group">
+                <label for="mobile">Mobile No.</label>
+                <input type="tel" name="mobile" class="input_form" required />
+              </div>
+            </div>
+          
+            <!-- Row 2 -->
+            <div class="form_row">
+              <div class="form_group">
+                <label for="email">Email</label>
+                <input type="email" class="input_form" value="<%= uEmail %>" disabled />
+              </div>
+              <div class="form_group">
+                <label for="city">City</label>
+                <input type="text" name="city_na" class="input_form" placeholder="Delhi" required />
+              </div>
+            </div>
+          
+            <!-- Row 3 -->
+            <div class="form_row">
+              <div class="form_group">
+                <label for="pin">PIN</label>
+                <input type="number" name="pin" class="input_form" placeholder="110001" required />
+              </div>
+              <div class="form_group">
+                <label for="state">State</label>
+                <select name="state" class="input_form select_form" required>
+                  <option value="" disabled selected>Select State</option>
+                  <option value="Andaman and Nicobar Islands">
+                    Andaman and Nicobar Islands
+                  </option>
+                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                  <option value="Assam">Assam</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Chhattisgarh">Chhattisgarh</option>
+                  <option value="Dadra and Nagar Haveli">
+                    Dadra and Nagar Haveli
+                  </option>
+                  <option value="Daman and Diu">Daman and Diu</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Gujarat">Gujarat</option>
+                  <option value="Haryana">Haryana</option>
+                  <option value="Himachal Pradesh">Himachal Pradesh</option>
+                  <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                  <option value="Jharkhand">Jharkhand</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Ladakh">Ladakh</option>
+                  <option value="Lakshadweep">Lakshadweep</option>
+                  <option value="Madhya Pradesh">Madhya Pradesh</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Manipur">Manipur</option>
+                  <option value="Meghalaya">Meghalaya</option>
+                  <option value="Mizoram">Mizoram</option>
+                  <option value="Nagaland">Nagaland</option>
+                  <option value="Odisha">Odisha</option>
+                  <option value="Puducherry">Puducherry</option>
+                  <option value="Punjab">Punjab</option>
+                  <option value="Rajasthan">Rajasthan</option>
+                  <option value="Sikkim">Sikkim</option>
+                  <option value="Tamil Nadu">Tamil Nadu</option>
+                  <option value="Telangana">Telangana</option>
+                  <option value="Tripura">Tripura</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="Uttarakhand">Uttarakhand</option>
+                  <option value="West Bengal">West Bengal</option>
+                </select>
+              </div>
+              <div class="form_group">
+                <label for="country">Country</label>
+                <input type="text" class="input_form" value="Bharat" disabled />
+                <input type="hidden" name="country_na" value="Bharat" />
+              </div>
+            </div>
+          
+            <!-- Row 4 -->
+            <div class="form_row">
+              <div class="form_group full_width">
+                <label for="address">Address</label>
+                <textarea name="add" class="input_form textarea_form" placeholder="426 Red Street" required></textarea>
+              </div>
+            </div>
+          
+            <!-- Row 5 -->
+            <div class="form_row">
+              <button type="submit" class="btn_primary full_width">Save & Continue</button>
+            </div>
+          </form>
+          
+        </div>
+      
+      <!--* Order details  -->
+      <div class="order-detail_section">
+        <div class="main-order_box">
+          <h2>Order Summery</h2>
+          <div class="summery">
+          <%data.forEach((entry,index)=>{%>
+          <div class="order_box">
+            <div class="img_box">
+              <img
+                class="img"
+                src="/images/book_img/<%=entry.file_name%>"
+                alt=""
+              />
+            </div>
+            <div class="C_box_txt">
+              <h4><%=entry.book_name%></h4>
+              <span><%=entry.author%></span>
+            </div>
+            <div class="tol_price">
+              <span>₹</span>
+              <span class="price"><%=entry.price%></span>
+            </div>
+          </div>
+          <%});%>
+          <div class="place_order">
+            <div class="flex_box-total subTotal_box">
+              <span>Subtotal</span>
+              <div>
+                <span>₹</span>
+                <span class="totalSu"><%= totalSum %></span>
+              </div>
+            </div>
+            <div class="flex_box-total subTotal_box">
+              <span>Shipping</span>
+              <div>
+                <span style="color: orangered;">Free</span>
+              </div>
+            </div>
+            <div style="border-top: 1px solid #ddd;
+            margin-top: 2rem;
+            padding: 1rem 0rem;" class="flex_box-total tol_price">
+              <span>Total</span>
+              <div>
+                <span>₹</span>
+                <span class="totalSu"><%= totalSum %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+          <!-- <div class="summary_totals">
+            <div><span>Subtotal</span><span>₹<span class="totalSu"><%= totalSum %></span></span></div>
+            <div><span>Shipping</span><span>Free</span></div>
+            <div class="total_line">
+              <span>Total</span><span>₹<span class="totalSu"><%= totalSum %></span></span>
+            </div>
+          </div> -->
+        </div>
+      </section>
+      
+          <!-- Footer -->
+    <%- include('partials/footer') %>
+  </body>
+</html>

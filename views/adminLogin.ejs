@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Login</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Ionicons (Optional) -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <!-- CSS: Reuse the same CSS file you're using for signup/login/updatePwd -->
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+
+  <body>
+    <% if (error) { %>
+    <div class="alert alert-danger">! <%= error %> !</div>
+    <% } %>
+    <section class="signup-section">
+      <div class="signup-container">
+        <!-- Form Section -->
+        <div class="form-section">
+          <!-- Logo -->
+          <a class="logo-box" href="/">
+            <img class="logo" src="/images/main-logo.png" alt="logo" />
+          </a>
+
+          <!-- Admin Heading -->
+          <h1>Admin Login</h1>
+
+          <!-- Admin Login Form -->
+          <form
+            class="signup-form"
+            action="/admin_logProcess"
+            method="post"
+            id="admin-login-form"
+          >
+            <!-- Email -->
+            <div class="input-box">
+              <label for="email">Email</label>
+              <input
+                class="input-field"
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Enter your email address"
+              />
+            </div>
+
+            <!-- Password -->
+            <div class="input-box">
+              <label for="pwd">Password</label>
+              <input
+                class="input-field"
+                type="password"
+                name="pwd"
+                id="pwd"
+                placeholder="Enter password"
+                autocomplete="new-password"
+              />
+            </div>
+
+            <!-- Submit Button -->
+            <button class="btn" type="submit">
+              <span>Login</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Image Section (Optional background image or graphic) -->
+        <div class="image-section">
+          <div class="bg-color"></div>
+          <div class="bg-img"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JS (Clear autofill fields if necessary) -->
+    <script>
+      window.onload = function () {
+        document.querySelector('input[name="email"]').value = '';
+        document.querySelector('input[name="pwd"]').value = '';
+      };
+    </script>
+  </body>
+</html>

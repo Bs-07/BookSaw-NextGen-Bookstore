@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/table.css" />
+    <script defer src="/js/admin.js"></script>
+  </head>
+  <body>
+    <section class="main_section">
+      <%- include('partials/admin_nav') %>
+
+      <div class="main_container">
+        <div class="header_box">
+          <h1 class="heading">Welcome back ! <%= aname %></h1>
+          <div class="greeting_box">
+            <div id="greetGif"></div>
+            <span id="greet" class="sub_txt">Good Afternoon</span>
+          </div>
+        </div>
+        <!-- Load Tenor embed script (only once per page) -->
+        <script
+          type="text/javascript"
+          async
+          src="https://tenor.com/embed.js"
+        ></script>
+
+        <div class="container_1">
+          <div class="box">
+            <div class="box-heading">
+              <span>Total Customers</span>
+              <ion-icon name="diamond-outline"></ion-icon>
+            </div>
+            <div class="box-detail">
+              <h3 class="main_txt"><%=count%></h3>
+              <div>
+                <ion-icon name="caret-up-outline"></ion-icon>
+                <span class="sub_txt">30%</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-heading">
+              <span>Available Books</span>
+              <ion-icon name="diamond-outline"></ion-icon>
+            </div>
+            <div class="box-detail">
+              <h3 class="main_txt"><%=bCount%></h3>
+              <div>
+                <ion-icon name="caret-up-outline"></ion-icon>
+                <span class="sub_txt">30%</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-heading">
+              <span>Revenue</span>
+              <ion-icon name="diamond-outline"></ion-icon>
+            </div>
+            <div class="box-detail">
+              <h3 class="main_txt">
+                <span style="font-size: 2.24rem">₹</span> <%= revenue %>
+              </h3>
+              <div>
+                <ion-icon name="caret-up-outline"></ion-icon>
+                <span class="sub_txt">30%</span>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-heading">
+              <span>Books Sold</span>
+              <ion-icon name="diamond-outline"></ion-icon>
+            </div>
+            <div class="box-detail">
+              <h3 class="main_txt"><%= bookSold %></h3>
+              <div>
+                <ion-icon name="caret-up-outline"></ion-icon>
+                <span class="sub_txt">30%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container_2">
+          <main class="container">
+            <header class="header">
+              <h1 class="title">Popular Books</h1>
+              <p class="subtitle">Top 10 popular books till now</p>
+            </header>
+
+            <section class="card">
+              <div class="table-wrap">
+                <table class="book-table" role="table" aria-label="Books table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Book</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Growth</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Sold</th>
+                      <th scope="col">Sales</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% popularBooks.forEach((popularBook)=>{ %>
+                    <tr>
+                      <td class="book-cell">
+                        <img
+                          class="thumb"
+                          src="/images/book_img/<%= popularBook.file_name %>"
+                          alt="<% popularBook.book_name %>"
+                        />
+                        <div class="meta">
+                          <div class="name"><%= popularBook.book_name %></div>
+                          <div class="muted">by <%= popularBook.author %></div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <span class="badge"><%= popularBook.cate %></span>
+                      </td>
+
+                      <td>
+                        <div class="growth up">
+                          +12.4% <span class="sr-only">increase</span>
+                        </div>
+                      </td>
+
+                      <td>₹<%= popularBook.price %></td>
+
+                      <td><%= popularBook.total_sold %></td>
+
+                      <td>
+                        <div class="sales">
+                          <!-- <div class="bar" style="--p: 78"></div> -->
+                          <div class="sales-amount">
+                            ₹<%= popularBook.total_sales %>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

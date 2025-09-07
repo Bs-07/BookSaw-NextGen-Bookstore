@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/table.css" />
+    <script defer src="/js/admin.js"></script>
+    <style>
+      :root {
+        --radius: 10px;
+        --border: #e5e7eb;
+        --muted: #6b7280;
+        --accent: #7c3aed;
+        --danger: #ef4444;
+        --bg: #ffffff;
+        --hover: lavender;
+        --shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+      }
+
+      .header-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .heading-books {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        /* margin-bottom: 2.8rem; */
+      }
+      .title {
+        font-size: 2.6rem;
+        margin-bottom: 1rem;
+      }
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.3rem;
+      }
+      .option_box {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        position: relative;
+      }
+      .option_box a {
+        text-decoration: none;
+        color: #222;
+      }
+      .option_box ion-icon {
+        font-size: 2rem;
+      }
+      .user-sort-dropdown {
+        display: none;
+        position: absolute;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        top: 30px;
+        right: 0;
+        z-index: 2000;
+        min-width: 180px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .user-sort-dropdown ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .user-sort-dropdown ul li {
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 1.42rem;
+        font-weight: 600;
+      }
+
+      .user-sort-dropdown ul li:hover {
+        background: lavender;
+      }
+
+      .card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem;
+        margin: 1.5rem auto;
+        max-width: 900px;
+        box-shadow: var(--shadow);
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      .modern-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 1.4rem;
+        min-width: 60rem;
+      }
+
+      .modern-table thead th {
+        text-align: left;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: var(--muted);
+        padding: 1.2rem 1.4rem;
+        border-bottom: 1px solid var(--border);
+        /* background: #fafafa; */
+      }
+
+      .modern-table tbody td {
+        padding: 0.8rem 1.4rem;
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+        color: #111827;
+      }
+
+      .modern-table tbody tr:hover {
+        background: var(--hover);
+      }
+
+      .delete-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: var(--radius);
+        color: var(--danger);
+        background: rgba(239, 68, 68, 0.08);
+        transition: background 0.2s ease, transform 0.15s ease;
+      }
+
+      .delete-btn:hover {
+        background: rgba(239, 68, 68, 0.15);
+        transform: scale(1.05);
+      }
+
+      .delete-btn ion-icon {
+        font-size: 1.8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="main_section">
+      <%- include('partials/admin_nav') %>
+
+      <div class="main_container">
+        <div class="header_box">
+          <h1 class="heading">Welcome back ! <%= aname %></h1>
+          <div class="greeting_box">
+            <div id="greetGif"></div>
+            <span id="greet" class="sub_txt">Good Afternoon</span>
+          </div>
+        </div>
+        <!-- Load Tenor embed script (only once per page) -->
+        <script
+          type="text/javascript"
+          async
+          src="https://tenor.com/embed.js"
+        ></script>
+
+        <div class="header-flex">
+          <div class="heading-book">
+            <h1 class="title">
+              Customers
+              <span
+                style="
+                  font-size: 1.4rem;
+                  color: #fff;
+                  background-color: #333;
+                  border-radius: 2rem;
+                  padding: 0.1rem 0.8rem;
+                "
+                >50</span
+              >
+            </h1>
+            <p class="subtitle">All registered customers are shown here.</p>
+          </div>
+          <div class="option_box">
+            <a id="sortUsers" class="btn" href="#">
+              <ion-icon name="options-outline"></ion-icon>
+            </a>
+            <div class="user-sort-dropdown" id="userSortDropdown">
+              <ul>
+                <li data-sort="name-asc">Name: A → Z</li>
+                <li data-sort="name-desc">Name: Z → A</li>
+                <li data-sort="id-asc">ID: Ascending</li>
+                <li data-sort="id-desc">ID: Descending</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="table-wrap">
+            <table class="modern-table" aria-label="Users table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% data.forEach((entry)=>{ %>
+                <tr>
+                  <td><%= entry.name %></td>
+                  <td><%= entry.email %></td>
+                  <td><%= entry.pwd %></td>
+                  <td class="td-delete">
+                    <a
+                      href="delProcess?em=<%= entry.email %>"
+                      class="delete-btn"
+                    >
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </a>
+                  </td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const sortUsersBtn = document.getElementById('sortUsers');
+      const userSortDropdown = document.getElementById('userSortDropdown');
+      const userTableBody = document.querySelector('.modern-table tbody');
+      let rows = Array.from(userTableBody.querySelectorAll('tr'));
+
+      // Toggle dropdown
+      sortUsersBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        userSortDropdown.style.display =
+          userSortDropdown.style.display === 'block' ? 'none' : 'block';
+      });
+
+      // Close dropdown when clicked outside
+      document.addEventListener('click', (e) => {
+        if (
+          !sortUsersBtn.contains(e.target) &&
+          !userSortDropdown.contains(e.target)
+        ) {
+          userSortDropdown.style.display = 'none';
+        }
+      });
+
+      // Sorting logic
+      userSortDropdown.querySelectorAll('li').forEach((item) => {
+        item.addEventListener('click', () => {
+          const sortType = item.dataset.sort;
+
+          rows.sort((a, b) => {
+            const nameA = a.cells[0].innerText.toLowerCase();
+            const nameB = b.cells[0].innerText.toLowerCase();
+            const idA = Array.from(userTableBody.children).indexOf(a);
+            const idB = Array.from(userTableBody.children).indexOf(b);
+
+            if (sortType === 'name-asc') return nameA.localeCompare(nameB);
+            if (sortType === 'name-desc') return nameB.localeCompare(nameA);
+            if (sortType === 'id-asc') return idA - idB;
+            if (sortType === 'id-desc') return idB - idA;
+          });
+
+          // Re-append sorted rows
+          rows.forEach((row) => userTableBody.appendChild(row));
+
+          // Close dropdown
+          userSortDropdown.style.display = 'none';
+        });
+      });
+    </script>
+  </body>
+</html>

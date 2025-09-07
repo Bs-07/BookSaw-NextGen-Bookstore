@@ -1,0 +1,80 @@
+<div class="nav_section">
+  <div class="logo">
+    <a class="logo-flex" href="#">
+      <img class="logo-img" src="images/main-logo.png" alt="logo" />
+      <span>Dashboard</span>
+    </a>
+  </div>
+  <nav class="nav">
+    <li class="nav_item">
+      <a
+        href="/backHome"
+        class="nav_link flex_box <%= currentPage === 'home' ? 'active' : '' %>"
+      >
+        <ion-icon name="grid-outline"></ion-icon>
+        <span>Home</span>
+      </a>
+    </li>
+    <li class="nav_item">
+      <a
+        href="/show_customers"
+        class="nav_link flex_box <%= currentPage === 'customers' ? 'active' : '' %>"
+      >
+        <ion-icon name="people-outline"></ion-icon>
+        <span>Customers</span>
+      </a>
+    </li>
+    <li class="nav_item">
+      <a
+        href="/show_books"
+        class="nav_link flex_box <%= currentPage === 'books' ? 'active' : '' %>"
+      >
+        <ion-icon name="book-outline"></ion-icon>
+        <span>Books</span>
+      </a>
+    </li>
+    <li class="nav_item">
+      <a
+        href="/orders"
+        class="nav_link flex_box <%= currentPage === 'orders' ? 'active' : '' %>"
+      >
+        <ion-icon name="cube-outline"></ion-icon>
+        <span>Orders</span>
+      </a>
+    </li>
+    <li class="nav_item">
+      <a
+        href="show_requestedBooks"
+        class="nav_link flex_box <%= currentPage === 'request' ? 'active' : '' %>"
+      >
+        <ion-icon name="send-outline"></ion-icon>
+        <span>Request Books</span>
+      </a>
+    </li>
+    <li class="nav_item">
+      <a
+        href="show_feedbacks"
+        class="nav_link flex_box <%= currentPage === 'feedback' ? 'active' : '' %>"
+      >
+        <ion-icon name="mail-outline"></ion-icon>
+        <span>Feedback</span>
+      </a>
+    </li>
+  </nav>
+  <div class="profile_container">
+    <div class="flex_box">
+      <div class="profile__img_box">
+        <img src="images/pngwing.com.png" alt="" class="profile_img" />
+      </div>
+      <div class="profile-text">
+        <h4><%= aname %></h4>
+        <span><%= aem %></span>
+      </div>
+    </div>
+    <div class="logout-side">
+      <a href="/logout_admin">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </a>
+    </div>
+  </div>
+</div>

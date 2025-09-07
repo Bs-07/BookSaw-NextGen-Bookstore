@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booksaw.co</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Rubik:wght@500&&family=Water+Brush&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script defer src="/js/cate_popup.js"></script>
+    <script defer src="/js/copy.js"></script>
+
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <section class="home">
+      <div class="home_txt">
+        <h1 class="heading">Find your next book</h1>
+        <p class="para">
+          Our most popular and trending
+          <span class="main">On.Book</span> perfect Not sure what to read now
+          next reading mood Perfectly.
+        </p>
+        <a style="text-decoration: none; color: inherit" href="books_user"
+          ><button class="btn">Explore Now &roarr;</button></a
+        >
+      </div>
+      <div class="home_img">
+        <div class="img_txt">
+          <img
+            class="img img_1"
+            src="/images/book_img/Ikigai.jpg"
+            alt=""
+            srcset=""
+          />
+          <span>Ikigai</span>
+        </div>
+        <div class="img_txt">
+          <span>Bell the Bell Jar</span>
+          <img
+            class="img img_2"
+            src="/images/book_img/Bell the Bell Jar.jpg"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <div class="img_txt">
+          <img
+            class="img img_3"
+            src="/images/book_img/KARMA.jpg"
+            alt=""
+            srcset=""
+          />
+          <span>Karma</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <div class="container">
+        <h2 class="section-title">Why BookSaw ?</h2>
+
+        <div class="features-grid" id="features-container"></div>
+      </div>
+    </section>
+
+    <section class="section_cate">
+      <h1 class="heading-secondary">Genres</h1>
+
+      <div class="genre-circle-grid">
+        <!-- Genre Circle Item -->
+        <a class="genre-circle-item" href="personal">
+          <div
+            class="circle-img"
+            style="background-image: url('/images/book_img/Ikigai.jpg')"
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Personal Development</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Spirit">
+          <div
+            class="circle-img"
+            style="background-image: url('/images/book_img/KARMA.jpg')"
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Spirituality</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Act&dAd">
+          <div
+            class="circle-img"
+            style="
+              background-image: url('/images/book_img/Harry Potter and the Cursed Child.jpg');
+            "
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Action & Adventure</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Autography">
+          <div
+            class="circle-img"
+            style="background-image: url('/images/book_img/apj.jpg')"
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Autography</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Bus&Eco">
+          <div
+            class="circle-img"
+            style="background-image: url('/images/book_img/atomic_habits.jpeg')"
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Business & Economics</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Det&My">
+          <div
+            class="circle-img"
+            style="
+              background-image: url('/images/book_img/Murder on the Orient Express.jpg');
+            "
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Detective & Mystery</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Fantasy">
+          <div
+            class="circle-img"
+            style="
+              background-image: url('/images/book_img/Bell the Bell Jar.jpg');
+            "
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Fantasy novel</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="History">
+          <div
+            class="circle-img"
+            style="background-image: url('/images/book_img/Sapiens.jpg')"
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">History</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Novel">
+          <div
+            class="circle-img"
+            style="
+              background-image: url('/images/book_img/The Da Vinci Code.jpg');
+            "
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Novel</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Philosophy">
+          <div
+            class="circle-img"
+            style="
+              background-image: url('/images/book_img/The Urgency of Change.jpg');
+            "
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Philosophy</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="SciFi">
+          <div
+            class="circle-img"
+            style="
+              background-image: url('/images/book_img/The Martian (Weir novel).jpg');
+            "
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">SciFi</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Science">
+          <div
+            class="circle-img"
+            style="
+              background-image: url('/images/book_img/Black Holes  The Reith.jpg');
+            "
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Science</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="genre-circle-item" href="Biography">
+          <div
+            class="circle-img"
+            style="background-image: url('/images/book_img/Into the Wild.jpg')"
+          >
+            <div class="circle-overlay">
+              <span class="genre-title">Biography</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Repeat for other categories -->
+      </div>
+    </section>
+
+    <!-- book-section -->
+    <section class="book_section">
+      <h2 class="heading-secondary">Popular Books</h2>
+      <div class="pBook_container">
+        <% popularBooks.forEach((popularBook)=>{ %>
+        <div class="book_box">
+          <div class="box_img">
+            <img
+              src="/images/book_img/<%= popularBook.file_name %>"
+              alt=""
+              class="book_img"
+            />
+          </div>
+          <div class="box_txt">
+            <div>
+              <h1 style="font-size: 1.6rem"><%= popularBook.book_name %></h1>
+              <h4 style="font-size: 1.3rem"><%= popularBook.author %></h4>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+      <a class="btn btn_popular" href="books_user">More Books &roarr;</a>
+    </section>
+
+    <section class="feedback_section">
+      <div class="feedback_container">
+        <div class="text_area">
+          <p>Feedback</p>
+          <h1>We love hearing from you!</h1>
+          <span
+            >Your thoughts really help us out! Share you<br />
+            feedback and let's make things better together!</span
+          >
+        </div>
+        <form id="feedback_form">
+          <!-- Emoji options -->
+          <div class="emoji_group">
+            <label>
+              <input type="radio" name="emotion" value="😩" />
+              <span>😩</span>
+            </label>
+            <label>
+              <input type="radio" name="emotion" value="😥" />
+              <span>😥</span>
+            </label>
+            <label>
+              <!-- Default checked 😊 -->
+              <input type="radio" name="emotion" value="😊" checked />
+              <span>😊</span>
+            </label>
+            <label>
+              <input type="radio" name="emotion" value="😎" />
+              <span>😎</span>
+            </label>
+            <label>
+              <input type="radio" name="emotion" value="😍" />
+              <span>😍</span>
+            </label>
+          </div>
+
+          <!-- Text feedback -->
+          <textarea
+            name="feedback_msg"
+            placeholder="Share your thoughts"
+            cols="50"
+            rows="2"
+          ></textarea>
+
+          <!-- Submit -->
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+
+    <%- include('partials/footer') %>
+  </body>
+  <script>
+    const features = [
+      {
+        icon: "<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/></svg>",
+        title: 'Quick Delivery',
+        description:
+          'Get your favorite books delivered to your doorstep with our fast shipping options.',
+      },
+      {
+        icon: "<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>",
+        title: 'Secure Payment',
+        description:
+          'Shop with confidence using our secure payment gateways with advanced encryption.',
+      },
+      {
+        icon: "<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3'/></svg>",
+        title: 'Best Quality',
+        description:
+          'We source our books directly from publishers to ensure premium quality, authentic editions.',
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg>`,
+        title: 'Return Guarantee',
+        description:
+          'Not satisfied with your purchase? hassle-free return guarantee, return within 30 days for a full refund.',
+      },
+    ];
+
+    const featuresContainer = document.getElementById('features-container');
+
+    features.forEach((feature) => {
+      const featureElement = document.createElement('div');
+      featureElement.className = 'feature-box';
+      featureElement.innerHTML = `<div class='icon-container'>${feature.icon}</div><h3 class='feature_txt'>${feature.title}</h3><p class='feature_para'>${feature.description}</p>`;
+      featuresContainer.appendChild(featureElement);
+    });
+
+    // feedback js part----
+    function attachFeedbackHandler() {
+      const form = document.getElementById('feedback_form');
+      if (!form) return;
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault(); // stop page reload 🚫
+
+        // build JSON payload
+        const formData = {
+          emotion: form.querySelector("input[name='emotion']:checked").value,
+          feedback_msg: form.querySelector("textarea[name='feedback_msg']")
+            .value,
+        };
+
+        try {
+          const response = await fetch('/feedback', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+
+          const result = await response.json();
+          let container = document.querySelector('.feedback_container');
+          let originalContent = container.innerHTML;
+
+          if (result.success) {
+            container.innerHTML = `
+                    <div class="success_message">
+                        <h2>🎉 Thank you for your feedback!</h2>
+                        <p>We truly appreciate your time 💙</p>
+                    </div>
+                    `;
+          } else {
+            container.innerHTML = `
+                    <div class="success_message">
+                        <h2>⚠️ Oops!</h2>
+                        <p>Something went wrong. Please try again.</p>
+                    </div>
+                    `;
+          }
+
+          setTimeout(() => {
+            container.innerHTML = originalContent;
+            attachFeedbackHandler(); // reattach
+          }, 3000);
+        } catch (error) {
+          console.error('Error submitting feedback:', error);
+        }
+      });
+    }
+
+    attachFeedbackHandler();
+  </script>
+</html>

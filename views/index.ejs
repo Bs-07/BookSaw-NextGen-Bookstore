@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booksaw.co</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mallanna&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Rubik:wght@500&&family=Water+Brush&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="/js/new_book.js"></script>
+    <script defer src="/js/cate_popup.js"></script>
+    <script defer src="/js/copy.js"></script>
+
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/cate_hover.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <link rel="stylesheet" href="/css/cart.css" />
+  </head>
+  <body>
+    <div id="overlay">
+      <header>
+        <div class="nav_section">
+          <a href="#">
+            <img class="logo" src="/images/main-logo.png" alt="logo" />
+          </a>
+          <nav class="nav">
+            <ul class="nav_list">
+              <li class="nav_item">
+                <a href="back_home" class="nav_link">
+                  <div class="flex_box">
+                    <!-- <ion-icon style="font-size: 2.5rem;" name="home-outline"></ion-icon> -->
+                    <span>Home</span>
+                  </div>
+                </a>
+              </li>
+              <li class="nav_item">
+                <a href="books_user" class="nav_link">
+                  <div class="flex_box">
+                    <!-- <ion-icon style="font-size: 2.5rem;" name="home-outline"></ion-icon> -->
+                    <span>Books</span>
+                  </div>
+                </a>
+              </li>
+              <li class="nav_item">
+                <a href="#" class="nav_link">
+                  <div id="cate_popup" class="flex_box">
+                    <span>Category</span>
+                    <ion-icon
+                      id="down"
+                      style="
+                        font-size: 2rem;
+                        margin-left: -1.2rem;
+                        margin-top: 0.5rem;
+                      "
+                      name="chevron-down-outline"
+                    ></ion-icon>
+                  </div>
+                  <ul class="cate_nav hidden_cate">
+                    <div class="div_1">
+                      <li
+                        class="cate_nav_item"
+                        data-label="Action and Adventure"
+                      >
+                        <a class="cate_nav_link" href="Act&dAd"
+                          >Action and Adventure</a
+                        >
+                      </li>
+                      <li class="cate_nav_item" data-label="Autography">
+                        <a class="cate_nav_link" href="Autography"
+                          >Autography</a
+                        >
+                      </li>
+                      <li class="cate_nav_item" data-label="Biography">
+                        <a class="cate_nav_link" href="Biography">Biography</a>
+                      </li>
+                      <li
+                        class="cate_nav_item"
+                        data-label="Business & Economics"
+                      >
+                        <a class="cate_nav_link" href="Bus&Eco"
+                          >Business & Economics</a
+                        >
+                      </li>
+                      <li
+                        class="cate_nav_item"
+                        data-label="Detective and Mystery"
+                      >
+                        <a class="cate_nav_link" href="Det&My"
+                          >Detective and Mystery</a
+                        >
+                      </li>
+                    </div>
+                    <div class="div_2">
+                      <li class="cate_nav_item" data-label="Fantasy novel">
+                        <a class="cate_nav_link" href="Fantasy"
+                          >Fantasy novel</a
+                        >
+                      </li>
+                      <li
+                        class="cate_nav_item"
+                        data-label="Health, Family & Personal Development"
+                      >
+                        <a class="cate_nav_link" href="personal"
+                          >Personal Development</a
+                        >
+                      </li>
+                      <li class="cate_nav_item" data-label="History">
+                        <a class="cate_nav_link" href="History">History</a>
+                      </li>
+                      <li class="cate_nav_item" data-label="Novel">
+                        <a class="cate_nav_link" href="Novel">Novel</a>
+                      </li>
+                      <li
+                        class="cate_nav_item"
+                        data-label="Personal Development"
+                      >
+                        <a class="cate_nav_link" href="personal"
+                          >Personal Development</a
+                        >
+                      </li>
+                    </div>
+                    <div class="div_3">
+                      <li class="cate_nav_item" data-label="Philosophy">
+                        <a class="cate_nav_link" href="Philosophy"
+                          >Philosophy</a
+                        >
+                      </li>
+
+                      <li class="cate_nav_item" data-label="SciFi">
+                        <a class="cate_nav_link" href="SciFi">SciFi</a>
+                      </li>
+                      <li class="cate_nav_item" data-label="Science">
+                        <a class="cate_nav_link" href="Act&dAd">Science</a>
+                      </li>
+                      <li class="cate_nav_item" data-label="Spirituality">
+                        <a class="cate_nav_link" href="Spirit">Spirituality</a>
+                      </li>
+                    </div>
+                  </ul>
+                </a>
+              </li>
+              <!-- <li class="nav_item">
+              <a href="#" class="nav_link">
+                <div class="flex_box">
+                  <span>Wishlist</span>
+                </div>
+              </a>
+            </li> -->
+              <li class="nav_item">
+                <a href="#" class="nav_link">
+                  <div class="flex_box">
+                    <!-- <ion-icon style="font-size: 2.5rem;" name="book-outline"></ion-icon> -->
+                    <span>Blog</span>
+                  </div>
+                </a>
+              </li>
+              <li class="nav_item">
+                <a href="#" class="nav_link">
+                  <div class="flex_box">
+                    <!-- <ion-icon style="font-size: 2.5rem;" name="book-outline"></ion-icon> -->
+                    <span>About us</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="flex_box">
+            <input
+              type="hidden"
+              name="search"
+              placeholder="Search book"
+              id=""
+            />
+            <ion-icon class="icon_search" name="search-outline"></ion-icon>
+
+            <!-- <ion-icon style="font-size: 2.5rem;" name="book-outline"></ion-icon> -->
+            <a
+              style="text-decoration: none; color: inherit"
+              href="wishlist"
+              class="sign"
+              ><ion-icon
+                style="font-size: 2.5rem"
+                name="heart-outline"
+              ></ion-icon
+            ></a>
+            <a style="text-decoration: none; color: inherit" href="show_cart">
+              <ion-icon class="icon_cart" name="bag-outline"></ion-icon
+            ></a>
+            <!-- <ion-icon
+            style="font-size: 3rem; text-align: center"
+            name="person-circle-outline"
+          ></ion-icon> -->
+
+            <a href="#" class="profile"
+              ><span style="text-transform: capitalize">Hi,</span> <%=user%>
+            </a>
+            <!-- <ion-icon class="icon_cart" name="chevron-down-outline"></ion-icon> -->
+            <div id="pro_box" class="profile_box hidden">
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 1.5rem;
+                "
+              >
+                <div class="icon_profile">
+                  <!-- <ion-icon name="person-outline"></ion-icon> -->
+                  <img class="profile" src="/images/profile.jpg" alt="" />
+                </div>
+                <h2 class="pName"><%=user%></h2>
+                <h2 class="pEmail"><%=uEmail%></h2>
+              </div>
+              <div class="setting">
+                <a href="#">Edit profile</a>
+                <a href="show_orders">Orders</a>
+                <a href="#">Settings</a>
+              </div>
+              <a class="logout" href="logout" rel="noopener noreferrer"
+                >Logout</a
+              >
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="home">
+        <div class="home_txt">
+          <h1 class="heading">Find your next book</h1>
+          <p class="para">
+            Our most popular and trending
+            <span class="main">On.Book</span> perfect Not sure what to read now
+            next reading mood Perfectly.
+          </p>
+          <button class="btn">Explore Now &roarr;</button>
+        </div>
+        <div class="home_img">
+          <div class="img_txt">
+            <img
+              class="img img_1"
+              src="/images/book_img/Fantastic Beasts and Where to Find Them.jpg"
+              alt=""
+              srcset=""
+            />
+            <span>Fantastic Beasts and Where to Find Them</span>
+          </div>
+          <div class="img_txt">
+            <span>THE GOLDFINCH</span>
+            <img
+              class="img img_2"
+              src="/images/book_img/THE GOLDFINCH.jpg"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <div class="img_txt">
+            <img
+              class="img img_3"
+              src="/images/book_img/Relativity.jpg"
+              alt=""
+              srcset=""
+            />
+            <span>Relativity</span>
+          </div>
+        </div>
+      </section>
+
+      <!--* Feature-Section -->
+      <section class="feature_section">
+        <div class="feature_container">
+          <div class="feature_box">
+            <div class="icon_box">
+              <ion-icon name="flash"></ion-icon>
+            </div>
+            <div class="feat_txt">
+              <h3>Quick Delivery</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+                in nihil sequi njdio officia.
+              </p>
+            </div>
+          </div>
+          <div class="feature_box">
+            <div class="icon_box">
+              <ion-icon name="shield-checkmark"></ion-icon>
+            </div>
+            <div class="feat_txt">
+              <h3>Secure Payment</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+                in nihil sequi njdio officia.
+              </p>
+            </div>
+          </div>
+          <div class="feature_box">
+            <div class="icon_box">
+              <ion-icon name="thumbs-up"></ion-icon>
+            </div>
+            <div class="feat_txt">
+              <h3>Best Quality</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+                in nihil sequi njdio officia.
+              </p>
+            </div>
+          </div>
+          <div class="feature_box">
+            <div class="icon_box">
+              <ion-icon name="sync"></ion-icon>
+            </div>
+            <div class="feat_txt">
+              <h3>Return Guarantee</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+                in nihil sequi njdio officia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section_cate">
+        <h2 class="heading-secondary pad">Genre</h2>
+        <div class="logos">
+          <div class="logos-slide">
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/Ikigai.jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Personal Development</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/KARMA.jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Spirituality</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/Fantastic Beasts and Where to Find Them.jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Fantasy novel</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/The Psychology of Money.jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Business & Economics</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/Into the Wild.jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Biography</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/The Alchemist.jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Philosophy</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/The Martian (Weir novel).jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">SciFi</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/Sapiens.jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">History</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/apj.jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Autography</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/Dune.jpeg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Action and Adventure</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/Murder on the Orient Express.jpg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Detective and Mystery</span>
+              </div>
+            </a>
+            <a class="box_link" href="#">
+              <div class="box">
+                <img
+                  class="cate_img"
+                  src="/images/book_img/One Hundred Years of Solitude.jpeg"
+                  alt="book_img"
+                />
+                <span class="cate_txt">Novel</span>
+              </div>
+            </a>
+          </div>
+          <!--* =============================================================================================== -->
+          <div class="logos-slide">
+            <div class="sub_con">
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/Ikigai.jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Personal Development</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/KARMA.jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Spirituality</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/Fantastic Beasts and Where to Find Them.jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Fantasy novel</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/The Psychology of Money.jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Business & Economics</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/Into the Wild.jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Biography</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/The Alchemist.jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Philosophy</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/The Martian (Weir novel).jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">SciFi</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/Sapiens.jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">History</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/apj.jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Autography</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/Dune.jpeg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Action and Adventure</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/Murder on the Orient Express.jpg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Detective and Mystery</span>
+                </div>
+              </a>
+              <a class="box_link" href="#">
+                <div class="box">
+                  <img
+                    class="cate_img"
+                    src="/images/book_img/One Hundred Years of Solitude.jpeg"
+                    alt="book_img"
+                  />
+                  <span class="cate_txt">Novel</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--* book-section -->
+      <section class="book_section">
+        <h2 class="heading-secondary">Popular Books</h2>
+        <div class="pBook_container">
+          <div class="book_box">
+            <div class="box_img">
+              <div id="ion" class="icon">
+                <ion-icon class="ion" name="heart-outline"></ion-icon>
+              </div>
+              <img
+                src="/images/book_img/Bell the Bell Jar.jpg"
+                alt=""
+                class="book_img"
+              />
+            </div>
+            <div class="box_txt">
+              <div>
+                <h1 id="h1">Bell the Bell Jar</h1>
+                <h4>Sylvia Plath</h4>
+              </div>
+              <span>₹456/-</span>
+              <!-- <a style="" class="btn" href="store">Add to cart</a> -->
+            </div>
+          </div>
+          <div class="book_box">
+            <div class="box_img">
+              <div id="ion" class="icon">
+                <ion-icon class="ion" name="heart-outline"></ion-icon>
+              </div>
+              <img
+                src="/images/book_img/Life of Pi.jpg"
+                alt=""
+                class="book_img"
+              />
+            </div>
+            <div class="box_txt">
+              <div>
+                <h1 id="h1">Life of Pi</h1>
+                <h4>Yann Martel</h4>
+              </div>
+              <span>₹1130.87/-</span>
+              <!-- <a style="" class="btn" href="store">Add to cart</a> -->
+            </div>
+          </div>
+          <div class="book_box">
+            <div class="box_img">
+              <div id="ion" class="icon">
+                <ion-icon class="ion" name="heart-outline"></ion-icon>
+              </div>
+              <img
+                src="/images/book_img/The Da Vinci Code.jpg"
+                alt=""
+                class="book_img"
+              />
+            </div>
+            <div class="box_txt">
+              <div>
+                <h1 id="h1">The Da Vinci Code</h1>
+                <h4>BROWN DAN</h4>
+              </div>
+              <span>₹254/-</span>
+              <!-- <a style="" class="btn" href="store">Add to cart</a> -->
+            </div>
+          </div>
+          <div class="book_box">
+            <div class="box_img">
+              <div id="ion" class="icon">
+                <ion-icon class="ion" name="heart-outline"></ion-icon>
+              </div>
+              <img src="/images/book_img/Ikigai.jpg" alt="" class="book_img" />
+            </div>
+            <div class="box_txt">
+              <div>
+                <h1 id="h1">Ikigai</h1>
+                <h4>SFrancesc Miralles and Hector Garcia</h4>
+              </div>
+              <span>₹354/-</span>
+              <!-- <a style="" class="btn" href="store">Add to cart</a> -->
+            </div>
+          </div>
+          <div class="book_box">
+            <div class="box_img">
+              <div id="ion" class="icon">
+                <ion-icon class="ion" name="heart-outline"></ion-icon>
+              </div>
+              <img
+                src="/images/book_img/Into the Wild.jpg"
+                alt=""
+                class="book_img"
+              />
+            </div>
+            <div class="box_txt">
+              <div>
+                <h1 id="h1">Into the Wild</h1>
+                <h4>Jon Krakauer</h4>
+              </div>
+              <span>₹699/-</span>
+              <!-- <a style="" class="btn" href="store">Add to cart</a> -->
+            </div>
+          </div>
+          <div class="book_box">
+            <div class="box_img">
+              <div id="ion" class="icon">
+                <ion-icon class="ion" name="heart-outline"></ion-icon>
+              </div>
+              <img
+                src="/images/book_img/The Alchemist.jpg"
+                alt=""
+                class="book_img"
+              />
+            </div>
+            <div class="box_txt">
+              <div>
+                <h1 id="h1">The Alchemist</h1>
+                <h4>Sylvia Plath</h4>
+              </div>
+              <span>₹456/-</span>
+              <!-- <a style="" class="btn" href="store">Add to cart</a> -->
+            </div>
+          </div>
+        </div>
+        <a
+          style="
+            text-align: center;
+            padding: 2rem 0rem;
+            display: block;
+            width: 20%;
+            margin: 0 auto;
+          "
+          class="btn"
+          href="books_user"
+          >More Books</a
+        >
+      </section>
+
+      <section class="section_board">
+        <div class="board_box">
+          <p class="sub_o">Special Offer</p>
+          <h1>50% off on your first order</h1>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 2rem;
+              width: 50%;
+            "
+          >
+            <div class="tooltip">
+              <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+              <p class="code">
+                USE CODE: <span onclick="copy(this)">WELCOME50%</span>
+              </p>
+            </div>
+            <!-- <button class="btn btn--white">Copy text</button> -->
+          </div>
+        </div>
+        <div class="img_box_bo">
+          <img src="/images/poster/Untitled Project.jpg" alt="" />
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer_container grid grid--footer">
+          <div class="logo-col">
+            <a href="#" class="footer-logo">
+              <img class="logo" src="/images/main-logo.png" alt="logo" />
+            </a>
+
+            <ul class="social-links">
+              <li>
+                <a class="footer-link" href="#"
+                  ><ion-icon
+                    class="social-icon"
+                    name="logo-instagram"
+                  ></ion-icon
+                ></a>
+              </li>
+              <li>
+                <a class="footer-link" href="#"
+                  ><ion-icon class="social-icon" name="logo-facebook"></ion-icon
+                ></a>
+              </li>
+              <li>
+                <a class="footer-link" href="#"
+                  ><ion-icon class="social-icon" name="logo-twitter"></ion-icon
+                ></a>
+              </li>
+            </ul>
+
+            <p class="copyright">
+              Copyright &copy; <span class="year">2024</span> by Booksaw.co,
+              Inc. All rights reserved.
+            </p>
+          </div>
+
+          <div class="address-col">
+            <p class="footer-heading">Contact us</p>
+            <address class="contacts">
+              <p class="address">
+                623 Harrison St., 2nd Floor, San Francisco, CA 94107
+              </p>
+              <p>
+                <a class="footer-link" href="tel:415-201-6370">415-201-6370</a
+                ><br />
+                <a class="footer-link" href="mailto:hello@omnifood.com"
+                  >hello@booksaw_co.com</a
+                >
+              </p>
+            </address>
+          </div>
+
+          <nav class="nav-col">
+            <p class="footer-heading">Account</p>
+            <ul class="footer-nav">
+              <li><a class="footer-link" href="#">Create account</a></li>
+              <li><a class="footer-link" href="#">Sign in</a></li>
+              <li><a class="footer-link" href="#">iOS app</a></li>
+              <li><a class="footer-link" href="#">Android app</a></li>
+            </ul>
+          </nav>
+
+          <nav class="nav-col">
+            <p class="footer-heading">Company</p>
+            <ul class="footer-nav">
+              <li><a class="footer-link" href="#">About Booksaw.co</a></li>
+              <li><a class="footer-link" href="#">For Business</a></li>
+              <li><a class="footer-link" href="#">Book-Selling partners</a></li>
+              <li><a class="footer-link" href="#">Careers</a></li>
+            </ul>
+          </nav>
+
+          <nav class="nav-col">
+            <p class="footer-heading">Resources</p>
+            <ul class="footer-nav">
+              <li><a class="footer-link" href="#">Recipe directory </a></li>
+              <li><a class="footer-link" href="#">Help center</a></li>
+              <li><a class="footer-link" href="#">Privacy & terms</a></li>
+            </ul>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script>
+    const profile = document.querySelector('.profile');
+    const box = document.getElementById('pro_box');
+
+    profile.addEventListener('click', (el) => {
+      box.classList.toggle('hidden');
+      console.log('hello');
+    });
+  </script>
+</html>
