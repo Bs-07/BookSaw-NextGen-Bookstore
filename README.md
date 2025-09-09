@@ -2,12 +2,7 @@
 
 **A modern e-commerce platform for selling books online, built as part of the IGNOU BCA Project (BCSP-064).**
 
-![BookSaw Preview](public/images/poster/Web_Photo_Editor.jpg)
 ![alt text](image.png)
-
-<!-- replace with your actual screenshot path -->
-
----
 
 ## 🚀 Features
 
@@ -44,6 +39,7 @@
 
 ## 📂 Project Structure
 
+```
 BookSaw/
 │── index.js # Main server file
 │── booksaw_co.sql # Database schema & sample data
@@ -51,20 +47,22 @@ BookSaw/
 │── views/ # EJS templates
 │── package.json # Dependencies
 │── README.md # This file
+```
 
 ## ⚙️ Setup Instructions
 
-- Install WebServer64 or any MySQL-supported stack.
+- `Install WebServer64 or any MySQL-supported stack.`
 
 * Start MySQL service from WebServer64.
 
 - Open phpMyAdmin → create a database named booksaw.
 
-- Import booksaw_co.sql.
+- `Import booksaw_co.sql`
 
-- Install Node.js (v16+).
+- `Install Node.js (v16+)`
 
 - In project root, install dependencies:
+
   ` npm install`
 
 - Start the server:
@@ -73,28 +71,36 @@ BookSaw/
 - Open in browser:
   `http://localhost:5050/`
 
-#### 🔑 Test Credentials
+### 🔑 Test Credentials
 
 - Admin Login
 
-* Email: admin@booksaw.com
-* Password: admin123
+```
+Email: admin@booksaw.com
+Password: admin123
+```
 
 - Customer Login
 
-* Email: user1@gmail.com
-* Password: user123
+```
+Email: amelia.rodriguez@example.com
+Password: password22
+```
 
 ### 📸 Screenshots
 
 Landing Page
-![Alt text](/public/images/web_imgs/localhost_5050_.png.jpg 'Optional Title')
+![BookSaw Preview](public/images/web_imgs/localhost_5050_.png)
 
 Browse Books
+![BookSaw Preview](public/images/web_imgs/localhost_5050_books_user.png)
 
 Cart & Checkout
+![BookSaw Preview](public/images/web_imgs/localhost_5050_show_cart.png)
+![BookSaw Preview](public/images/web_imgs/localhost_5050_place_order.png)
 
 Admin Dashboard
+![BookSaw Preview](<public/images/web_imgs/localhost_5050_admin%20(1).png>)
 
 ## 🔮 Future Enhancements
 
@@ -118,12 +124,13 @@ Admin Dashboard
 - MDN Web Docs
 - FreeCodeCamp
 - Jonas Schmedtmann – Node.js Course
+- Web Dev Simplified
 - Piyush Garg – Node.js & Express Tutorials
 - Hitesh Choudhary – Web Dev Tutorials
-- Web Dev Simplified
 
 ## 📝 License
 
-````This project is part of an academic submission for IGNOU BCA (BCSP-064).
-Feel free to explore and learn, but do not submit as your own project.```
-````
+```
+This project is part of an academic submission for IGNOU BCA (BCSP-064).
+Feel free to explore and learn, but do not submit as your own project.
+```

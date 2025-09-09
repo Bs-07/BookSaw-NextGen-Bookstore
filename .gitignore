@@ -1,0 +1,36 @@
+# Node dependencies
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Logs
+*.log
+logs
+*.out
+*.pid
+*.seed
+*.gz
+
+# Environment variables
+.env
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Git backups
+*.orig
+
+# Ignore database dumps except your main export
+*.sql
+!booksaw_co.sql
+
+# Ignore build caches
+dist/
+.cache/
+
+# Ignore package lock if not needed
+package-lock.json
