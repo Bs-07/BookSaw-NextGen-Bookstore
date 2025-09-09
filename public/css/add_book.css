@@ -1,0 +1,226 @@
+html {
+  font-size: 62.5%;
+}
+
+.subheading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.heading-secondary {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: #555;
+  /* background-image: linear-gradient(to right top, #fd9cd3, #fc8fd0, #fb83cd, #f975cb, #f767c9, #f05cc5, #e950c1, #e243bd, #d538b7, #c82bb0, #ba1eaa, #ad0ba4); */
+}
+
+.logo-login {
+  font-size: 2.3rem;
+  color: #555;
+  /* background-image: linear-gradient(to left top, #add7f9, #86aed1, #6086aa, #3b6184, #143e60); */
+}
+
+/**************************/
+/* NAVIGATION */
+/**************************/
+
+.main-nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.main-nav-link_log:link,
+.main-nav-link_log:visited {
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #555;
+  transition: all 0.3s;
+}
+
+.main-nav-link_log:hover,
+.main-nav-link_log:active {
+  color: #ff48d5;
+}
+
+.main-nav-link.nav-cta:link,
+.main-nav-link.nav-cta:visited {
+  padding: 1rem 2.2rem;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #f3f2ec;
+}
+
+.main-nav-link.nav-cta:hover,
+.main-nav-link.nav-cta:active {
+  color: #fff;
+  background-color: #f3f2ec;
+
+  /* border: 1px solid #a6a824; */
+}
+
+.container {
+  /* 1140px */
+  max-width: 110rem;
+  padding: 2.5rem 3.2rem;
+  margin: 0 auto;
+}
+
+.section-login {
+  /* top / right / bottom / left */
+  /* padding: 9.6rem 0 12.8rem 0; */
+
+  /* top / horizontal / left */
+  padding: 4.8rem 0 12.8rem;
+}
+
+.cta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* background-color: #e67e22; */
+  background-color: rgba(255, 255, 255, 0.13);
+  /* position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%; */
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+
+  /* background-image: linear-gradient(to right top, #fd9cd3, #fc8fd0, #fb83cd, #f975cb, #f767c9, #f05cc5, #e950c1, #e243bd, #d538b7, #c82bb0, #ba1eaa, #ad0ba4); */
+  overflow: hidden;
+}
+
+.cta-text-box {
+  padding: 4.8rem 6.4rem 6.4rem 6.4rem;
+  color: #333;
+}
+
+.cta .heading-login {
+  /* color: #45260a; */
+  font-size: 5.2rem;
+  color: inherit;
+  margin-bottom: 3.2rem;
+}
+
+.cta-text {
+  font-size: 1.9rem;
+  line-height: 1.8;
+  margin-bottom: 4.8rem;
+}
+
+.cta-img-box {
+  align-self: center;
+  background-image: url("4025692.jpg");
+  width: 80vh;
+  height: 90vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.cta-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  /* grid-template-columns: 1fr 1fr;
+    column-gap: 4.2rem;
+    row-gap: 2.4rem; */
+}
+
+.cta-form label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 1.1rem;
+}
+
+.cta-form .input,
+.cta-form select,
+.cta-form textarea {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.8rem;
+  font-family: inherit;
+  color: inherit;
+  border: none;
+  background-color: #f3f2ec;
+
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.cta-form input::placeholder,
+textarea::placeholder {
+  color: #aaa;
+}
+
+/* file upload button */
+input[type="file"]::file-selector-button {
+  font-size: 1.8rem;
+  font-family: inherit;
+  color: inherit;
+  background-color: #f3f2ec;
+
+  padding: 2px 16px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+  margin-right: 16px;
+  transition: background-color 200ms;
+}
+
+/* file upload button hover state */
+input[type="file"]::file-selector-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* file upload button active state */
+input[type="file"]::file-selector-button:active {
+  background-color: #e5e7eb;
+}
+
+.cta *:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.8rem rgba(253, 242, 233, 0.5);
+}
+
+.rem {
+  display: flex;
+  gap: 12rem;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.8rem;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  background-color: #f3f2ec;
+  color: #333;
+  border-radius: 9px;
+  border-style: none;
+  text-decoration: none;
+  padding: 1.2rem;
+  transition: 0.4s;
+  margin-top: 2rem;
+}
+
+.btn-login:hover,
+.btn-login:active {
+  cursor: pointer;
+  background-color: rgb(233, 194, 155);
+  color: #fff;
+  box-shadow: 0px 5px 10px 0px rgb(233, 194, 155, 0.9);
+}

@@ -1,0 +1,139 @@
+/** Profile */
+.profile {
+  font-size: 2rem;
+  font-weight: 800;
+  padding: 1.2rem 1rem;
+  border-radius: 4rem;
+  cursor: pointer;
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-left: -1rem;
+  color: #333;
+
+  /* background-image: linear-gradient(
+    to right bottom,
+    #ffb287,
+    #f3a36b,
+    #e5964f,
+    #d48930,
+    #c27e00
+  );
+  -webkit-background-clip: text;
+  color: transparent; */
+}
+
+.profile_box {
+  width: 40rem;
+  height: 48rem;
+  position: absolute;
+  top: 7rem;
+  right: 6rem;
+  border-radius: 2rem;
+  box-shadow: 0 2rem 4rem rgb(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(2rem);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 2.5rem 2.5rem;
+  font-size: 1.4rem;
+  opacity: 1;
+  transition: all 0.4s ease-in-out;
+  z-index: 200;
+  user-select: none;
+}
+.hidden {
+  /* display: none; */
+  opacity: 0;
+  visibility: hidden;
+}
+.icon_profile {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  color: #000000;
+  z-index: 2;
+  /* margin-bottom: 2rem; */
+  overflow: hidden;
+}
+
+.icon_profile .profile {
+  width: 100%;
+  border-radius: 50rem;
+  position: absolute;
+  top: 50%;
+  left: 58%;
+  transform: translate(-50%, -50%);
+}
+
+.icon_profile:before {
+  content: "";
+  display: block;
+  width: 12rem;
+  height: 12rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #c5c5fb;
+  border-radius: 50rem;
+  z-index: -2;
+}
+
+.profile_box .pName {
+  font-size: 4.2rem;
+  color: #333;
+}
+.profile_box .pEmail {
+  font-size: 1.8rem;
+  color: #666;
+  margin-top: -1rem;
+  margin-bottom: 3rem;
+}
+
+.logout {
+  font-size: 2.5rem;
+  color: #333;
+  text-decoration: none;
+  padding: 1.5rem 1rem;
+  transition: all 0.4s ease;
+  border-top: 0.2rem solid rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+.logout:hover {
+  color: #e5964f;
+  /* background-image: linear-gradient(
+    to right bottom,
+    #ffb287,
+    #f3a36b,
+    #e5964f,
+    #d48930,
+    #c27e00
+  );*/
+  /* -webkit-background-clip: text;
+  color: transparent; */
+}
+
+.setting {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+.setting a {
+  font-size: 2.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.1s ease;
+}
+
+.setting a:hover {
+  font-weight: 600;
+}

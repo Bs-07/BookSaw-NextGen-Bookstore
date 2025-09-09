@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+/* Title section */
+.title-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 8rem 4rem;
+}
+.title-section .tool-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+}
+.tool-box .btn_tool {
+  border: none;
+  font-family: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.btn-request {
+  color: #fff;
+  background-color: #303f9f;
+  border-radius: 2rem;
+  padding: 0.4rem 2rem;
+  font-weight: 600;
+}
+.btn-request a {
+  text-decoration: none;
+  color: inherit;
+}
+.btn-request:hover {
+  background-color: #303f9fe7;
+  transform: scale(1.01);
+}
+/* Popup css */
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(0.5px);
+  display: none; /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup card with glass effect */
+.popup-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 1rem;
+  padding: 2rem 2.6rem;
+  width: 40rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: #333;
+  animation: fadeIn 0.3s ease;
+}
+
+.action-form {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 1.6rem;
+}
+
+.popup-card h3 {
+  font-family: inherit;
+  /* margin-bottom: 2rem; */
+  font-size: 1.58rem;
+  font-weight: 600;
+}
+.popup-card ion-icon {
+  font-size: 3.2rem;
+  --ionicon-stroke-width: 2.2rem;
+  cursor: pointer;
+}
+.popup-card ion-icon:hover {
+  color: crimson;
+  transform: scale(1.15);
+}
+
+/* Radio options */
+.popup-card label {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 1.46rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+/* Common styles for all status labels */
+/* common label style */
+.status-box {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.status-box input[type='text'] {
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  background: #eee;
+  border: none;
+  border-radius: 1.4rem;
+}
+.status-box input[type='text']:focus {
+  outline: 1px solid #2563eb;
+}
+
+/* Actions (Save/Cancel buttons) */
+.popup-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.popup-actions button {
+  font-family: inherit;
+  font-size: 1.42rem;
+  padding: 0.4rem 4.6rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.popup-actions button:first-child {
+  background: #fff;
+  border: 1px solid #eee;
+  transition: background 0.2s, color 0.2s;
+}
+.popup-actions button:first-child:hover {
+  background-color: #111827;
+  color: #fff;
+  transition: background 0.2s, color 0.2s;
+}
+
+.popup-actions button:last-child {
+  background: #4e46e5d3;
+  color: white;
+}
+.popup-actions button:last-child:hover {
+  background: #4f46e5;
+  border: 1px solid #eee;
+}
+
+.btn-sort {
+  background: none;
+  display: flex;
+  align-items: center;
+}
+.btn-sort ion-icon {
+  font-size: 2.4rem;
+}
+
+/* Sorting dropdown */
+.sort-dropdown {
+  display: none;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  top: 45px;
+  right: 0;
+  z-index: 2000;
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sort-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sort-dropdown ul li {
+  padding: 1.4rem 1.6rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.sort-dropdown ul li:hover {
+  background: lavender;
+}
+
+.tool-box {
+  position: relative; /* ensures dropdown is aligned properly */
+}
+
+.title-section h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1rem;
+}
+.title-section p {
+  font-size: 1.9rem;
+}
+
+.icon_grid {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: #111;
+  cursor: pointer;
+}
+
+/* Books Grid */
+.books-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  padding: 0 8rem 2rem;
+}
+
+.book-card {
+  background-color: #fff;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 1fr 15rem 4.6rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.box_img {
+  position: relative;
+  width: 100%;
+  height: 100%; /* fills the 30rem row */
+  overflow: hidden;
+  display: flex; /* centers image if needed */
+  align-items: stretch;
+}
+
+.book_img {
+  cursor: pointer;
+  width: 100%;
+  height: 100%; /* force all images to match container height */
+  object-fit: cover; /* crop instead of squish */
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.book-card:hover .book_img {
+  transform: scale(1.05);
+}
+
+.icon {
+  position: absolute;
+  top: 2.2rem;
+  right: 1.4rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  --ionicon-stroke-width: 3rem;
+  color: #000000;
+  z-index: 2;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.icon ion-icon {
+  font-size: 2.2rem;
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.icon::before {
+  content: '';
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #f9f8f3fa;
+  border-radius: 50rem;
+  z-index: -2;
+}
+
+.book-content {
+  padding: 1rem;
+  display: grid;
+  grid-template-rows: 2.3rem 1fr 2.2rem 1fr;
+  justify-items: flex-start;
+  gap: 0.6rem;
+}
+
+.cate {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  font-size: clamp(0.4rem, 1.1vw, 1.2rem);
+  color: #444;
+  background-color: #e0e0f9;
+  text-transform: uppercase;
+}
+
+.book-title {
+  font-size: clamp(1rem, 1.4vw, 1.9rem); /* min, preferred, max */
+  color: #333;
+}
+
+.author {
+  font-size: clamp(0.9rem, 1vw, 1.5rem);
+  color: #616161;
+}
+
+.price {
+  font-size: clamp(1rem, 1.3vw, 1.7rem);
+  color: #3f51b5;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #000;
+  color: #fff;
+  font-size: clamp(0.9rem, 1.4vw, 1.5rem);
+  font-family: inherit;
+  border: none;
+  text-decoration: none;
+  border-radius: 2.6rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #303f9f;
+}
+
+/* No books message */
+.no-books {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #777;
+  font-size: 1.2rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background-color: #e8eaf6;
+  color: #666;
+}
+.toast {
+  position: fixed;
+  right: 0;
+  bottom: 20px;
+  transform: translateX(-50%) translateY(20px);
+  padding: 10px 16px;
+  background: rgba(100, 62, 236, 0.945);
+  color: #fff;
+  border-radius: 8px;
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  z-index: 2000;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
