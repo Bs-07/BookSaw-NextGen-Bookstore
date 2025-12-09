@@ -2,12 +2,14 @@
 // Import Dependencies
 // ==============================
 const express = require('express');
+const bcrypt = require('bcrypt');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
 const multer = require('multer');
 const { cp } = require('fs');
+// const { use } = require('react');
 
 // ==============================
 // App Initialization
@@ -146,7 +148,7 @@ app.post('/regProcess', (req, res) => {
   }
 
   const check = 'SELECT 1 FROM members WHERE email = ? LIMIT 1';
-  db.query(check, [email], (err, rows) => {
+  db.query(check, [email], async (err, rows) => {
     // DB/server error → 500
     if (err)
       return res
@@ -159,8 +161,10 @@ app.post('/regProcess', (req, res) => {
         .status(409)
         .render('userSignup', { error: 'Email already registered.' });
 
+    const hashedPwd = await bcrypt.hash(pwd, 10);
+
     const insert = 'INSERT INTO members (name, email, pwd) VALUES (?, ?, ?)';
-    db.query(insert, [name, email, pwd], (err2) => {
+    db.query(insert, [name, email, hashedPwd], (err2) => {
       // DB/server error → 500
       if (err2)
         return res
@@ -177,7 +181,6 @@ app.post('/regProcess', (req, res) => {
 app.post('/logProcess', (req, res) => {
   const { email, pwd } = req.body;
 
-  // Validation error → 422
   if (!email || !pwd) {
     return res.status(422).render('userLogin', {
       error: 'Both email and password are required.',
@@ -185,20 +188,53 @@ app.post('/logProcess', (req, res) => {
   }
 
   const query = 'SELECT * FROM members WHERE email = ? LIMIT 1';
-  db.query(query, [email], (err, result) => {
-    // DB/server error → 500
+  db.query(query, [email], async (err, result) => {
     if (err)
       return res
         .status(500)
         .render('userLogin', { error: 'Server error. Try again.' });
 
-    // Not found → 401 (unauthorized)
     if (!result.length)
       return res.status(401).render('userLogin', { error: 'Email not found.' });
 
     const user = result[0];
-    // Wrong password → 401 (unauthorized)
-    if (user.pwd !== pwd) {
+    const storedPwd = user.pwd;
+    let isMatched = false;
+
+    function isBcryptHash(str) {
+      return typeof str === 'string' && /^\$2[aby]\$\d+\$/.test(str);
+    }
+
+    try {
+      if (isBcryptHash(storedPwd)) {
+        // ✅ new users (already hashed)
+        isMatched = await bcrypt.compare(pwd, storedPwd);
+      } else {
+        // 🧓 old users (plain text in DB)
+        if (pwd === storedPwd) {
+          isMatched = true;
+
+          // 🔁 upgrade this user to hashed in background
+          const newHash = await bcrypt.hash(pwd, 10);
+          db.query(
+            'UPDATE members SET pwd = ? WHERE email = ?',
+            [newHash, email],
+            (uErr) => {
+              if (uErr) console.error('Error upgrading password hash:', uErr);
+            }
+          );
+        } else {
+          isMatched = false;
+        }
+      }
+    } catch (e) {
+      console.error('Error checking password:', e);
+      return res
+        .status(500)
+        .render('userLogin', { error: 'Server error. Try again.' });
+    }
+
+    if (!isMatched) {
       return res
         .status(401)
         .render('userLogin', { error: 'Incorrect password.' });
@@ -229,7 +265,7 @@ app.post('/updPasswdProcess', (req, res) => {
 
   // 2. Check if email + old password match
   const checkQuery = 'SELECT * FROM members WHERE email = ? LIMIT 1';
-  db.query(checkQuery, [email], (err, result) => {
+  db.query(checkQuery, [email], async (err, result) => {
     if (err) {
       return res.status(500).render('userUpdatePwd', {
         error: 'Server error. Please try again later.',
@@ -243,15 +279,20 @@ app.post('/updPasswdProcess', (req, res) => {
     }
 
     const user = result[0];
-    if (user.pwd !== pwd) {
+
+    const isMatched = await bcrypt.compare(pwd, user.pwd);
+
+    if (!isMatched) {
       return res.status(401).render('userUpdatePwd', {
         error: 'Old password is incorrect.',
       });
     }
 
+    const hashedNewPwd = await bcrypt.hash(new_pwd, 10);
+
     // 3. Update password
     const updQuery = 'UPDATE members SET pwd = ? WHERE email = ?';
-    db.query(updQuery, [new_pwd, email], (err2) => {
+    db.query(updQuery, [hashedNewPwd, email], (err2) => {
       if (err2) {
         return res.status(500).render('userUpdatePwd', {
           error: 'Could not update password. Try again.',
@@ -607,12 +648,11 @@ app.get('/orders', (req, res) => {
 
   // Auto-update overdue statuses
   const autoUpdate = `
-    UPDATE order_items oi 
+    UPDATE order_items oi
     JOIN orders o ON oi.order_id = o.order_id
     SET oi.status = 'delivered'
-    WHERE oi.status != 'delivered'
-      AND o.delivery_date IS NOT NULL
-      AND o.delivery_date <= CURDATE()
+    WHERE oi.status NOT IN ('delivered', 'cancelled')
+    AND o.delivery_date = CURDATE();
   `;
 
   db.query(autoUpdate, (err) => {
@@ -734,7 +774,7 @@ USER BOOKS ROUTES
 ------------------------ */
 // Show all books
 app.get('/books_user', (req, res) => {
-  db.query('SELECT * FROM books', (err, books) => {
+  db.query('SELECT * FROM books ORDER BY book_id DESC', (err, books) => {
     if (err) throw err;
     res.render('all_books', {
       data: books,
@@ -1440,7 +1480,7 @@ app.get('/show_orders', (req, res) => {
     }
 
     // Step 3: Fetch all order items for this user
-    const itemsQuery = `SELECT * FROM order_items WHERE u_email = ? AND status != 'Cancelled'`;
+    const itemsQuery = `SELECT * FROM order_items WHERE u_email = ? `;
     db.query(itemsQuery, [userEmail], (err, allItems) => {
       if (err) {
         console.error('Error fetching cart items:', err);

@@ -53,7 +53,7 @@
         /* box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06); */
         margin-top: 2rem;
     }
-
+    
     .feedback_box{
         display: grid;
         grid-template-columns: 24rem 1fr;
@@ -61,6 +61,18 @@
         /* border-top: 1px solid #eee; */
         border-bottom: 1px solid #eee;
     }
+
+    @media (max-width:780px) {
+        .card {
+            padding: 1rem;
+        }
+        .feedback_box{
+            grid-template-columns: 18rem 1fr;
+            gap: 2rem;
+            padding: 2rem 2rem;
+        }
+    }
+    
     .flex-col{
         display: flex;
         flex-direction: column;
@@ -82,23 +94,14 @@
   </style>
 
   <body>
+    <div class="nav_overlay" id="navOverlay"></div>
+
     <section class="main_section">
         <%- include('partials/admin_nav') %>
 
       <div class="main_container">
-        <div class="header_box">
-          <h1 class="heading">Welcome back ! <%= aname %></h1>
-          <div class="greeting_box">
-            <div id="greetGif"></div>
-            <span id="greet" class="sub_txt">Good Afternoon</span>
-          </div>
-        </div>
-        <!-- Load Tenor embed script (only once per page) -->
-        <script
-          type="text/javascript"
-          async
-          src="https://tenor.com/embed.js"
-        ></script>
+        <%- include('partials/admin_header') %>
+
 
         <div class="container">
             <div class="header-flex">

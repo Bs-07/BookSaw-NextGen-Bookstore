@@ -55,7 +55,10 @@
 
     <section class="Show-orders_section">
       <div class="Show-orders_container">
-        <h1>Order History</h1>
+        <div class="text_section">
+          <h1 class="h1_txt">Order History</h1>
+          <p>Check the status of recent orders and manage products.</p>
+        </div>
 
         <% if (orders && orders.length > 0) { %> <% orders.forEach(order => { %>
         <div class="order-group">
@@ -97,22 +100,21 @@
                 <span class="cate"><%= item.cate %></span>
               </div>
               <div>
-                <span style="font-size: 1.2rem">x <%= item.quantity %></span>
+                <span>x <%= item.quantity %></span>
               </div>
               <div>
                 <span class="status <%= item.status %>"
                   ><%= item.status %></span
                 >
               </div>
-              <span style="font-size: 1.2rem; font-weight: 600"
-                >Delivered by <%= new Date(order.delivery_date).toDateString()
-                %></span
-              >
+              <span><%= new Date(order.delivery_date).toDateString() %></span>
               <div class="tol_price">
                 <span class="price"
                   >₹ <%= Number(item.price).toFixed(2) %></span
                 >
               </div>
+              <% if(item.status !== 'delivered' && item.status !== 'Cancelled'){
+              %>
               <div class="cancel-order">
                 <a
                   style="text-decoration: none; color: inherit"
@@ -120,6 +122,7 @@
                   >Cancel Order</a
                 >
               </div>
+              <% };%>
             </div>
           </div>
           <% }) %> <% } else { %>
@@ -262,4 +265,72 @@
     <!-- Footer -->
     <%- include('partials/footer') %>
   </body>
+  <script>
+    // show receipt overlay + shadow background
+    function openReceipt(orderId) {
+      const el = document.getElementById(`printableArea-${orderId}`);
+      const shadow = document.querySelector('.shadow_bg');
+
+      if (!el) return;
+      el.classList.remove('hidden');
+      if (shadow) shadow.classList.add('visible');
+      // prevent background scroll
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
+
+    // close specific receipt
+    function closeReceipt(orderId) {
+      const el = document.getElementById(`printableArea-${orderId}`);
+      const shadow = document.querySelector('.shadow_bg');
+
+      if (!el) return;
+      el.classList.add('hidden');
+      if (shadow) shadow.classList.remove('visible');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+
+    // print only the receipt contents
+    function printDiv(id) {
+      const printEl = document.getElementById(id);
+      if (!printEl) return;
+
+      // hide other things
+      const originalTitle = document.title;
+      const restore = [];
+
+      // Create new window for printing for consistent results
+      const w = window.open('', '_blank', 'noopener,noreferrer');
+      if (!w) {
+        // fallback: use print area approach
+        window.print();
+        return;
+      }
+
+      const doc = w.document;
+      // Basic styles (you can insert custom print CSS here)
+      doc.write('<!doctype html><html><head><title>Receipt</title>');
+      doc.write(
+        '<meta name="viewport" content="width=device-width,initial-scale=1" />'
+      );
+      doc.write('<style>');
+      doc.write('body{font-family: monospace; padding:20px; color:#111} ');
+      doc.write(
+        '.product_list, .product_item{display:grid; grid-template-columns:1fr 6rem 6rem; gap:0.5rem;}'
+      );
+      doc.write(
+        '.barcode{font-family: "Libre Barcode 128", monospace; font-size:28px;}'
+      );
+      doc.write('</style></head><body>');
+      doc.write(printEl.innerHTML);
+      doc.write('</body></html>');
+      doc.close();
+      w.focus();
+      setTimeout(() => {
+        w.print();
+        w.close();
+      }, 300);
+    }
+  </script>
 </html>

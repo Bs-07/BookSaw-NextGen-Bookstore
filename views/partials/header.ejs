@@ -45,6 +45,16 @@
     </div>
       <header>
         <div class="nav_section">
+
+    <button
+        type="button"
+        aria-controls="primaryNav"
+        aria-expanded="false"
+        class='mobile_nav_toggle'
+      >
+        <ion-icon id="btn_icon" name='menu-outline'></ion-icon>
+      </button>
+
           <!-- Left: Logo -->
           <div class="nav_left">
             <a href="/">
@@ -53,8 +63,15 @@
           </div>
 
           <!-- Middle: Nav Links -->
-          <div class="nav_center">
-            <li class="nav_list">
+          <nav  class="nav_center">
+              <ul id="primaryNav" data-visibility="false" class="nav_list">
+
+                    <li class="mobile_brand">
+                        <a href="/">
+                            <img src="/images/main-logo.png" alt="logo" class="mobile_logo" />
+                        </a>
+                    </li>
+
               <li class="nav_item">
                 <a
                   href="/back_home"
@@ -116,7 +133,7 @@
                 >
               </li>
             </ul>
-          </div>
+          </nav>
 
           <!-- Right: Search, Wishlist, Cart, Profile/Login -->
           <div class="nav_right">
@@ -128,7 +145,7 @@
             ></a>
 
             <% if (!user) { %>
-                <a href="/login" class="profile_btn">Login</a>
+                <a href="/login" class="profile_btn login">Login</a>
                 <a href="/reg" class="profile_btn sign_up">Sign Up</a>
               <% } else { %>
                 <div class="profile_dropdown">
@@ -260,4 +277,60 @@
     }
   });
 });
-      </script>
+
+const menuBtn = document.querySelector('.mobile_nav_toggle');
+const icon = document.getElementById('btn_icon');
+const navList = document.getElementById('primaryNav');
+
+function openMenu() {
+  navList.setAttribute('data-visibility', 'true');
+  menuBtn.setAttribute('aria-expanded', 'true');
+  icon.setAttribute('name', 'close-outline');
+  document.body.style.overflow = 'hidden';
+  document.body.classList.add('menu-open');  // 🔹 show overlay
+}
+
+function closeMenu() {
+    navList.setAttribute('data-visibility', 'false');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    icon.setAttribute('name', 'menu-outline');
+    document.body.style.overflow = '';
+    dropdownItem.classList.remove('open');
+  document.body.classList.remove('menu-open'); // 🔹 hide overlay
+}
+
+if (menuBtn && icon && navList) {
+  menuBtn.addEventListener('click', () => {
+    const isVisible = navList.getAttribute('data-visibility') === 'true';
+    if (!isVisible) openMenu();
+    else closeMenu();
+  });
+}
+
+// Close menu when clicking on overlay area (body)
+document.addEventListener('click', (e) => {
+  const isVisible = navList.getAttribute('data-visibility') === 'true';
+  if (!isVisible) return;
+
+  const clickInsideMenu = navList.contains(e.target);
+  const clickOnButton = menuBtn.contains(e.target);
+
+  if (!clickInsideMenu && !clickOnButton) {
+    closeMenu();
+  }
+});
+
+// CATEGORY DROPDOWN (inside sidebar)
+const dropdownItem = document.querySelector('.nav_item.dropdown');
+const dropdownToggle = dropdownItem?.querySelector('.nav_link');
+
+if (dropdownItem && dropdownToggle) {
+  dropdownToggle.addEventListener('click', (e) => {
+    if (window.innerWidth <= 992) {
+      e.preventDefault();
+      dropdownItem.classList.toggle('open');
+    }
+  });
+}
+
+</script>

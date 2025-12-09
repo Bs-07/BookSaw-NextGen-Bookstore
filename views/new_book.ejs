@@ -27,9 +27,9 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    
+    
     <script src="/js/chart-config.js" defer></script>
-
-
     <script defer src="/js/new_book.js"></script>
     <script defer src="/js/admin.js"></script>
 
@@ -39,44 +39,22 @@
     <link rel="stylesheet" href="/css/all_book.css" />
   </head>
   <body>
+    <div class="nav_overlay" id="navOverlay"></div>
+
     <section class="main_section">
         <%- include('partials/admin_nav') %>
 
       <div class="main_container">
-        <div class="header_box">
-          <h1 class="heading">Welcome back ! <%= aname %></h1>
-          <div class="greeting_box">
-            <div id="greetGif"></div>
-            <span id="greet" class="sub_txt">Good Afternoon</span>
-          </div>
-        </div>
-        <!-- Load Tenor embed script (only once per page) -->
-        <script
-          type="text/javascript"
-          async
-          src="https://tenor.com/embed.js"
-        ></script>
+        <%- include('partials/admin_header') %>
+
 
         <div class="bookAnalytics-container">
-          <!-- <div class="bookBox half_row">
-            <div class="bookBox-heading">
-              <span>Total Books</span>
-              <ion-icon class="pending" name="ellipse"></ion-icon>
-            </div>
-            <div class="bookBox-detail">
-              <h3 class="main_txt"><%= totalBooks %></h3>
-              <div>
-                  <ion-icon name="caret-up-outline"></ion-icon>
-                  <span class="sub_txt">30%</span>
-                </div>
-            </div>
-        </div> -->
         <div class="bookBox full_row">
           <div class="bestSellerCate">
             <span>Best Selling Book Category</span>
           </div>
           <div class="bookBox-detail">
-              <canvas id="bestSellingChart" width="88" height="40"></canvas>
+            <canvas id="bestSellingChart"></canvas>
           </div>
         </div>
           <div class="bestBook remain_row">

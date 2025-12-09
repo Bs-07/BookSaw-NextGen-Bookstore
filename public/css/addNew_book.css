@@ -56,6 +56,12 @@
   gap: 2rem;
 }
 
+@media (max-width: 780px) {
+  .book-form .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Groups */
 .book-form .form-group {
   display: flex;

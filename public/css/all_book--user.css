@@ -1,18 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 
-/* Title section */
+/* Base (desktop) is fine */
 .title-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 2rem 8rem 4rem;
+  gap: 2rem;
 }
+
 .title-section .tool-box {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.8rem;
 }
+
+/* Tablets */
+@media (max-width: 900px) {
+  .title-section {
+    padding: 2rem 3rem 3rem;
+    flex-wrap: wrap;
+  }
+
+  .title-section .tool-box {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .title-section {
+    padding: 1.6rem 1.8rem 2.4rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .title-section h1 {
+    font-size: 2.4rem;
+  }
+
+  .title-section p {
+    font-size: 1.5rem;
+  }
+
+  .title-section .tool-box {
+    width: 100%;
+    justify-content: space-between;
+    gap: 1.2rem;
+  }
+
+  .btn-request {
+    padding: 0.6rem 1.8rem;
+    font-size: 1.4rem;
+  }
+
+  .btn-sort ion-icon,
+  .icon_grid {
+    font-size: 2.1rem;
+  }
+}
+
 .tool-box .btn_tool {
   border: none;
   font-family: inherit;
@@ -49,7 +98,7 @@
 
 /* Popup card with glass effect */
 .popup-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 1rem;
@@ -198,6 +247,36 @@
   position: relative; /* ensures dropdown is aligned properly */
 }
 
+@media (max-width: 600px) {
+  .popup-card {
+    width: 90%;
+    background: rgba(255, 255, 255, 1);
+    padding: 1.6rem 1.8rem;
+  }
+
+  .status-box {
+    grid-template-columns: 1fr;
+  }
+
+  .status-box label {
+    font-size: 1.4rem;
+  }
+
+  .status-box input[type='text'] {
+    font-size: 1.4rem;
+    padding: 0.8rem 1.4rem;
+  }
+
+  .popup-actions {
+    flex-direction: column;
+  }
+
+  .popup-actions button {
+    width: 100%;
+    padding: 0.6rem 0;
+  }
+}
+
 .title-section h1 {
   font-family: 'Lexend', sans-serif;
   font-size: 3rem;
@@ -216,7 +295,7 @@
   cursor: pointer;
 }
 
-/* Books Grid */
+/* existing */
 .books-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -224,11 +303,57 @@
   padding: 0 8rem 2rem;
 }
 
+/* desktop hover is fine */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .books-container {
+    padding: 0 3rem 2rem;
+    gap: 1.6rem;
+  }
+
+  .book-card {
+    grid-template-rows: auto auto auto;
+  }
+
+  .book-content {
+    grid-template-rows: auto auto auto auto;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .books-container {
+    padding: 0 1.6rem 2rem;
+    gap: 1.4rem;
+  }
+
+  .book-card {
+    border-radius: 0.8rem;
+  }
+
+  .book-content {
+    padding: 0.8rem;
+  }
+
+  .book-title {
+  }
+
+  .btn-primary {
+    padding: 0.6rem 1rem;
+    width: 100%;
+  }
+
+  .no-books {
+    font-size: 1.4rem;
+  }
+}
+
 .book-card {
   background-color: #fff;
   border-radius: 10px;
   display: grid;
-  grid-template-rows: 1fr 15rem 4.6rem;
+  grid-template-rows: 1fr 10.6rem 4rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
 }
@@ -286,12 +411,19 @@
   z-index: -2;
 }
 
+.icon_grid {
+  display: none;
+}
+
 .book-content {
   padding: 1rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* display: grid;
   grid-template-rows: 2.3rem 1fr 2.2rem 1fr;
-  justify-items: flex-start;
-  gap: 0.6rem;
+  justify-items: flex-start; */
+  gap: 0.8rem;
 }
 
 .cate {
@@ -299,24 +431,29 @@
   align-items: center;
   padding: 0.4rem 1rem;
   border-radius: 2rem;
-  font-size: clamp(0.4rem, 1.1vw, 1.2rem);
+  font-size: clamp(0.8rem, 1.1vw, 1.2rem);
   color: #444;
   background-color: #e0e0f9;
   text-transform: uppercase;
 }
 
 .book-title {
-  font-size: clamp(1rem, 1.4vw, 1.9rem); /* min, preferred, max */
+  width: 15rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: clip;
+  font-size: clamp(1.55rem, 1.4vw, 1.9rem); /* min, preferred, max */
   color: #333;
 }
 
 .author {
-  font-size: clamp(0.9rem, 1vw, 1.5rem);
+  font-size: clamp(0.99rem, 1vw, 1.5rem);
   color: #616161;
 }
 
 .price {
-  font-size: clamp(1rem, 1.3vw, 1.7rem);
+  font-size: clamp(1.5rem, 1.3vw, 1.7rem);
   color: #3f51b5;
   font-weight: bold;
 }
@@ -324,7 +461,7 @@
 .btn-primary {
   background-color: #000;
   color: #fff;
-  font-size: clamp(0.9rem, 1.4vw, 1.5rem);
+  font-size: clamp(1.2rem, 1.4vw, 1.5rem);
   font-family: inherit;
   border: none;
   text-decoration: none;

@@ -4,6 +4,8 @@ fetch('/api/best_seller_categories')
     const categories = data.map((item) => item.category);
     const totals = data.map((item) => item.total_sold);
 
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
     const ctx = document.getElementById('bestSellingChart').getContext('2d');
 
     new Chart(ctx, {
@@ -15,7 +17,7 @@ fetch('/api/best_seller_categories')
             data: totals,
             backgroundColor: ['#7634df9b', '#7e06ced7'],
             borderRadius: 12,
-            barPercentage: 1.15,
+            barPercentage: 0.98,
             categoryPercentage: 0.88,
           },
         ],
@@ -32,7 +34,7 @@ fetch('/api/best_seller_categories')
                 align: 'start', // push inside from the bottom
                 offset: -76, // move upward from bottom
                 color: '#fff',
-                font: { weight: 'bold', size: 18 },
+                font: { weight: 'bold', size: isMobile ? 12 : 18 },
                 formatter: (value) => value,
               },
               // Category pill (at very bottom inside bar)
@@ -45,7 +47,7 @@ fetch('/api/best_seller_categories')
                 borderRadius: 32,
                 padding: { top: 5, bottom: 5, left: 12, right: 12 },
                 textAlign: 'center',
-                font: { weight: 'bold', size: 12.6 },
+                font: { weight: 'bold', size: isMobile ? 8 : 12.6 },
                 formatter: (_val, ctx) => {
                   const label = ctx.chart.data.labels[ctx.dataIndex];
                   const maxChars = 18; // 🔑 adjust per line width

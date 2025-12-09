@@ -49,6 +49,11 @@ ion-icon.cancelled {
   margin-top: 2.6rem;
   margin-bottom: 1.58rem;
 }
+@media (max-width: 780px) {
+  .filter-bar {
+    gap: 0;
+  }
+}
 
 .filter-btn {
   font-family: inherit;
@@ -71,6 +76,12 @@ ion-icon.cancelled {
   /* border: 1px solid #d1d5db; */
   color: #111827;
   font-weight: 600;
+}
+
+.order-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
 }
 
 /* Table Styling */
@@ -209,6 +220,11 @@ ion-icon.cancelled {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   color: #333;
   animation: fadeIn 0.3s ease;
+}
+@media (max-width: 680px) {
+  .popup-card {
+    width: 34rem;
+  }
 }
 
 .action-form {

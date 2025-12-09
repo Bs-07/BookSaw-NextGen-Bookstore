@@ -1,142 +1,280 @@
+/* ===== Order placed responsive styles ===== */
 .order_place__section {
-  padding: 5rem 12rem;
-  margin-top: 8rem;
+  padding: 4.5rem 1.6rem;
+  margin-top: 4.5rem;
+  box-sizing: border-box;
 }
 
+/* container: centered card with max width and fluid height */
 .op_container {
-  display: grid;
-  grid-template-rows: 3.5rem 1fr 1fr 1fr;
-  align-items: center;
-  /* justify-content: center; */
-  gap: 3rem;
-  background-color: #95e7bb;
-  width: 60%;
-  height: 62vh;
-  margin: 0 auto;
   position: relative;
+  width: 100%;
+  max-width: 86rem; /* desktop max width */
+  margin: 0 auto;
+  background-color: #95e7bb;
   border-radius: 2rem;
+  padding: 6.4rem 3.2rem 2.4rem; /* space for the big circular icon at top */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+  align-items: center;
+  box-sizing: border-box;
 }
 
+/* big circular icon that overlaps the top of the card */
 .op_icon_box {
-  /* position: absolute;
-  top: 0.6rem;
-  left: 50%; */
-  justify-self: center;
-  margin-top: -3.5rem;
-  background-color: #95e7bb;
+  position: absolute;
+  top: -5.2rem; /* overlap amount; adjusts in media queries */
+  left: 50%;
+  transform: translateX(-50%);
   width: 10rem;
   height: 10rem;
-  --ionicon-stroke-width: 4rem;
-  color: #333;
-  z-index: 2;
-  cursor: pointer;
-  transform: translateX(0px) scale(0.9);
-  transition: all 0.2s ease-out;
-  border: 1.2rem solid #fff;
   border-radius: 50%;
+  background: #95e7bb;
+  border: 1.2rem solid #fff;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .op_icon_box ion-icon {
-  font-size: 5.5rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  font-size: 4.2rem;
+  color: #111;
+  --ionicon-stroke-width: 3rem;
 }
 
+/* text area */
 .txt_box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.4rem;
+  text-align: center;
+  margin-top: 1.2rem;
 }
+
 .txt_box h1 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 2.6vw, 3rem);
+  margin: 0;
+  line-height: 1.05;
 }
+
 .txt_box p {
-  font-size: 2.2rem;
+  font-size: clamp(1.2rem, 1.6vw, 2.2rem);
+  margin: 0.2rem 0 0;
+  color: #1f2937;
 }
+
+/* order details row */
 .order_detail--box {
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 8rem;
-  padding: 0rem 4rem;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
+
+/* each stat column */
 .op_flex-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: 0.4rem;
+  padding: 1rem 1.4rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 1rem;
+  min-width: 8.4rem;
+  box-sizing: border-box;
 }
+
+/* large numeric text */
 .order_detail--box p {
-  font-size: 2.8rem;
+  font-size: clamp(1.6rem, 2.8vw, 2.8rem);
   font-weight: 800;
+  margin: 0;
+  color: #0f172a;
 }
+
 .order_detail--box span {
-  font-size: 2rem;
+  font-size: clamp(1rem, 1.2vw, 1.6rem);
+  color: #0f172a;
 }
+
+/* buttons */
 .op_btn-box {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
-/** button  */
-.btn_op:link,
-.btn_op:visited {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding: 1.4rem 4rem;
-  font-size: 1.8rem;
-  border: none;
-  font-family: inherit;
-  color: inherit;
-  background-color: #111;
-  color: #fff;
-  border-style: none;
+
+/* button base */
+.btn_op {
+  display: inline-block;
+  padding: 1rem 2.4rem;
+  font-size: clamp(1rem, 1.6vw, 1.8rem);
+  border-radius: 1.2rem;
   text-decoration: none;
-  border-radius: 1.4rem;
-
-  transition: 0.4s;
-  /* margin-top: 2rem; */
-  border: 2px solid #333;
-}
-.btn--white:link,
-.btn--white:visited {
-  background-color: #fff;
-  color: #333;
-  border: 2px solid #333;
-}
-
-.btn_op:hover,
-.btn_op:active {
+  border: 2px solid #111;
+  background: #111;
+  color: #fff;
   cursor: pointer;
-  background-color: #e2e2fd;
-  color: #444;
-  box-shadow: 0px 5px 10px 0px rgb(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+.btn_op.btn--white {
+  background: #fff;
+  color: #111;
+}
+
+/* hover */
+.btn_op:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* CO2 strip at bottom */
 .co2 {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-
   background-color: #b0edcd;
-  /* justify-self: stretch; */
-  /* width: 68rem; */
-  height: 5rem;
-  border-bottom-right-radius: 2rem;
-  border-bottom-left-radius: 2rem;
+  padding: 0.8rem 1.2rem;
+  border-bottom-left-radius: 1.6rem;
+  border-bottom-right-radius: 1.6rem;
+  color: #0f172a;
+  margin-top: 0.6rem;
 }
+
+/* icon in CO2 */
 .co2 ion-icon {
-  font-size: 2.6rem;
-  --ionicon-stroke-width: 3rem;
-  color: #333;
+  font-size: 1.8rem;
+  color: #0f172a;
 }
+
 .co2 h2 {
-  font-size: 2rem;
-  font-weight: 400;
+  font-size: clamp(1rem, 1.2vw, 1.6rem);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ===== Responsive tweaks ===== */
+
+/* Large tablets / small desktops */
+@media (max-width: 1100px) {
+  .op_container {
+    padding: 5.2rem 2.4rem 2rem;
+    gap: 1.8rem;
+  }
+
+  .op_icon_box {
+    top: -4.8rem;
+    width: 9.2rem;
+    height: 9.2rem;
+  }
+
+  .order_detail--box {
+    gap: 1.2rem;
+  }
+
+  .op_flex-box {
+    padding: 0.9rem 1.2rem;
+  }
+}
+
+/* Tablets / landscape phones */
+@media (max-width: 800px) {
+  .op_container {
+    padding: 4.8rem 1.8rem 1.6rem;
+  }
+
+  .op_icon_box {
+    top: -4.2rem;
+    width: 8.6rem;
+    height: 8.6rem;
+  }
+
+  .order_detail--box {
+    gap: 1rem;
+    padding: 0 0.6rem;
+  }
+
+  .op_flex-box {
+    min-width: 7.2rem;
+  }
+
+  .txt_box h1 {
+    font-size: clamp(1.6rem, 2.2vw, 2.4rem);
+  }
+
+  .txt_box p {
+    font-size: 1.2rem;
+  }
+
+  .btn_op {
+    padding: 0.8rem 1.8rem;
+  }
+
+  .co2 {
+    padding: 0.6rem 1rem;
+  }
+}
+
+/* Small phones: stack details vertically */
+@media (max-width: 520px) {
+  .op_container {
+    padding: 3.8rem 1.2rem 1.2rem;
+    border-radius: 1.2rem;
+    gap: 1.2rem;
+  }
+
+  .op_icon_box {
+    top: -3.8rem;
+    width: 7.6rem;
+    height: 7.6rem;
+  }
+
+  .txt_box {
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Make stats stack vertically */
+  .order_detail--box {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .op_flex-box {
+    width: 100%;
+    max-width: 20rem;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .op_btn-box {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .btn_op {
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem 1.2rem;
+  }
+
+  .co2 {
+    padding: 0.8rem 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
 }

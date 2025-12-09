@@ -32,3 +32,39 @@ function setGreeting() {
 
 // Run when page loads
 window.addEventListener('DOMContentLoaded', setGreeting);
+
+const navSection = document.querySelector('.nav_section');
+const menuBtn = document.getElementById('menuBtn');
+// const icon = document.getElementById('menu-icon');
+const navOverlay = document.getElementById('navOverlay');
+console.log(navOverlay);
+
+function openMenu() {
+  navSection.classList.add('is-open');
+  //   icon.setAttribute('name', 'close-outline');
+  navOverlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  navSection.classList.remove('is-open');
+  navOverlay.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+if (menuBtn) {
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navSection.classList.contains('is-open');
+    if (isOpen) closeMenu();
+    else openMenu();
+  });
+}
+
+if (navOverlay) {
+  navOverlay.addEventListener('click', closeMenu);
+}
+
+navSection.addEventListener('click', (e) => {
+  const link = e.target.closest('.nav_link');
+  if (link) closeMenu();
+});

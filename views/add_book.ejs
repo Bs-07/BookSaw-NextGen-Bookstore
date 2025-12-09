@@ -25,7 +25,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="/css/admin.css" />
     <!-- <link rel="stylesheet" href="css/table.css" /> -->
     <!-- <script defer src="/js/new_book.js"></script> -->
 
@@ -33,23 +33,13 @@
     <script defer src="/js/admin.js"></script>
   </head>
   <body>
+    <div class="nav_overlay" id="navOverlay"></div>
+
     <section class="main_section">
       <%- include('partials/admin_nav') %>
 
       <div class="main_container">
-        <div class="header_box">
-          <h1 class="heading">Welcome back ! <%= aname %></h1>
-          <div class="greeting_box">
-            <div id="greetGif"></div>
-            <span id="greet" class="sub_txt">Good Afternoon</span>
-          </div>
-        </div>
-        <!-- Load Tenor embed script (only once per page) -->
-        <script
-          type="text/javascript"
-          async
-          src="https://tenor.com/embed.js"
-        ></script>
+        <%- include('partials/admin_header') %>
 
         <div class="container">
           <div class="header-flex">

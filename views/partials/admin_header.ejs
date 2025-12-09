@@ -1,0 +1,34 @@
+<div class="header_box">
+  <div class="header_mobile">
+    <a href="/backHome" class="header_logo">
+      <img src="images/main-logo.png" alt="logo" />
+      <span>Dashboard</span>
+    </a>
+
+    <button class="menu_btn" id="menuBtn" aria-label="Open menu">
+      <ion-icon id="menu-icon" name="menu-outline"></ion-icon>
+    </button>
+  </div>
+  <div class="header_left">
+    <!-- menu icon + logo on mobile -->
+    <!-- <button class="menu_btn" id="menuBtn" aria-label="Open menu">
+              <ion-icon id="menu-icon" name="menu-outline"></ion-icon>
+            </button>
+
+            <a href="/backHome" class="header_logo">
+              <img src="images/main-logo.png" alt="logo" />
+              <span>Dashboard</span>
+            </a> -->
+
+    <!-- main heading (visible on desktop, we can tweak on mobile) -->
+    <h1 class="heading">Welcome back ! <%= aname %></h1>
+  </div>
+
+  <div class="greeting_box">
+    <div id="greetGif"></div>
+    <span id="greet" class="sub_txt">Good Afternoon</span>
+  </div>
+</div>
+
+<!-- Load Tenor embed script (only once per page) -->
+<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
